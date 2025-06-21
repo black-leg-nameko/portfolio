@@ -40,6 +40,7 @@ body {
 
     .mobile-menu.show {
         display: flex !important;
+        transform: translateX(0%);
     }
 
     .holo-card, p {
@@ -147,16 +148,19 @@ body {
     display: none;
     position: fixed;
     top: 0;
-    width: 70vw;
-    height: 100vh;
-    background: rgba(0, 255, 255, 0.03);
+    right: 0;
+    width: 100vw;
+    height: 50vh;
+    background: rgba(0, 255, 255, 0.2);
     backdrop-filter: blur(10px);
     border-left: 1px solid rgba(0, 255, 255, 0.2);
     box-shadow: -5px 0 15px rgba(0, 255, 255, 0.2);
     z-index: 1000;
     padding: 2rem 1rem;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    transition: transform 0.4s ease-in-out;
+    transform: translateX(100%);
 }
 
 
