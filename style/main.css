@@ -83,11 +83,6 @@ body {
         font-size: 1rem;
     }
 
-    .project {
-        padding: 1rem;
-        max-width: 90vw;
-    }
-
     .contact-link {
         padding: 0.5rem 1rem;
         font-size: 0.9rem;
@@ -253,7 +248,8 @@ nav a {
 
 
 .page-section {
-    height: 100vh;
+    /*height: 100vh;*/
+    min-height: 100vh;
     padding: 4rem;
     background: rgba(0, 255, 255, 0.03);
     border-top: 1px solid rgba(0, 255, 255, 0.1);
@@ -300,6 +296,42 @@ nav a {
     vertical-align: middle;
 }
 
+.portfolio-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.project-card {
+    font-size: inherit !important;
+    width: 80%;
+    line-height: 1.4;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 1rem;
+    background: #1e1e1e;
+    color: #fff;
+    scroll-snap-align: unset;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
+    transition: transform 0.4s ease-in-out, box-shadow 0.4s ease;
+}
+
+.project-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    z-index: 99;
+}
+
+.project-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
 
 .page-section p {
     font-size: 2rem;
@@ -316,6 +348,7 @@ nav a {
     flex-wrap: wrap;
     justify-content: center;
 }
+
 
 
 .contact-link {
