@@ -29,7 +29,7 @@ body {
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 825px) {
     .hamburger {
         display: flex !important;
     }
@@ -86,6 +86,24 @@ body {
     .contact-link {
         padding: 0.5rem 1rem;
         font-size: 0.9rem;
+    }
+    
+    #portfolio {
+        padding: 0;
+    }
+
+    .portfolio-wrapper {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .project-card {
+        max-width: 100%;
+    }
+    
+    .project-card h3,
+    .project-card h4 {
+        font-size: 1rem !important;
     }
 }
 
@@ -306,7 +324,6 @@ nav a {
 }
 
 .project-card {
-    font-size: inherit !important;
     width: 80%;
     line-height: 1.4;
     text-align: center;
@@ -315,7 +332,6 @@ nav a {
     padding: 1rem;
     background: #1e1e1e;
     color: #fff;
-    scroll-snap-align: unset;
     box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
     transition: transform 0.4s ease-in-out, box-shadow 0.4s ease;
 }
@@ -331,6 +347,11 @@ nav a {
     height: auto;
     border-radius: 8px;
     margin-bottom: 2rem;
+}
+
+.project-card h3,
+.project-card h4 {
+    font-size: 2rem;
 }
 
 .page-section p {
