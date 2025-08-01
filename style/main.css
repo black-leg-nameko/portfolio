@@ -101,9 +101,12 @@ body {
         max-width: 100%;
     }
     
-    .project-card h3,
-    .project-card h4 {
+    .project-card h3 {
         font-size: 1rem !important;
+    }
+
+    .project-card h4 {
+        font-size: 0.6rem !important;
     }
 }
 
@@ -349,9 +352,13 @@ nav a {
     margin-bottom: 2rem;
 }
 
-.project-card h3,
-.project-card h4 {
+.project-card h3 {
     font-size: 2rem;
+    text-decoration: underline;
+}
+
+.project-card h4 {
+    font-size: 1.3rem;
 }
 
 .page-section p {
