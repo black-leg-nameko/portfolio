@@ -55,6 +55,7 @@ body {
     
     h2 {
         font-size: 1.25rem !important;
+        text-decoration: underline;
     }
     
 
@@ -128,7 +129,6 @@ body {
 .holo-card h1 {
     font-size: 3.5rem;
     margin-bottom: 1rem;
-    text-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff;
 }
 
 .holo-card p {
@@ -188,14 +188,12 @@ body {
     text-decoration: none;
     font-size: 1.5rem;
     margin: 1.0rem 0;
-    text-shadow: 0 0 8px #00f0ff;
     transition: 0.3s;
 }
 
 
 .mobile-menu nav a:hover {
     transform: scale(1.25);
-    text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
 }
 
 
@@ -256,14 +254,12 @@ nav a {
 
 .main-menu a:hover, .contact-link:hover {
     color: #e0e0ff;
-    text-shadow: 0 0 5px #00f0ff, 0 0 10px #00f0ff;
     transform: scale(1.25);
 }
 
 
 .avatar:hover {
     color: #e0e0ff;
-    text-shadow: 0 0 5px #00f0ff, 0 0 10px #00f0ff;
     transform: scale(1.04);
 }
 
@@ -287,7 +283,6 @@ nav a {
 .page-section h2 {
     font-size: 3rem;
     margin-bottom: 1rem;
-    text-shadow: 0 0 10px #00f0ff;
 }
 
 .my-field-container {
@@ -300,7 +295,6 @@ nav a {
     font-size: 1.7rem;
     margin-bottom: 1rem;
     width: 25%;
-    text-shadow: 0 0 10px #00f0ff;
     /*position: relative;*/
     text-align: left;
     padding-left: 1.5rem;
