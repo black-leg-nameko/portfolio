@@ -75,6 +75,13 @@ body {
         gap: 0.5rem;
     }
 
+    .page-section {
+        padding-top: clamp(64px, 12vh, 120px) !important;
+        padding-bottom: 2rem !important;
+        min-height: auto !important;
+    }
+
+
     .page-section h2 {
         font-size: 2rem;
         text-decoration: underline;
@@ -360,10 +367,7 @@ nav a {
 
 .about-list,
 .tech-list {
-  list-style: disc inside;
-  padding: 0;
-  margin: 0;
-  display: grid;
+  list-style: disc outside;
   gap: 1.2rem;
 }
 
