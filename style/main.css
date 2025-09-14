@@ -80,6 +80,18 @@ body {
         text-decoration: underline;
     }
 
+    .about-details {
+        padding: 1rem;
+    }
+
+    .tech-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .my-field-container {
+        grid-template-columns: 1fr;
+    }
+
     .page-section p,
     .page-section h3 {
         font-size: 1rem;
@@ -288,6 +300,11 @@ nav a {
 }
 
 .my-field-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
     color: #fff;
     z-index: 1;
 }
@@ -312,6 +329,95 @@ nav a {
     font-size: 0.3rem;
     vertical-align: middle;
 }
+
+
+.about-details {
+  width: min(900px, 92vw);
+  margin-top: 1.25rem;
+  padding: 1.25rem 1.25rem 1rem;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.02);
+  border-radius: 10px;
+  box-shadow: none;
+}
+
+.about-details h3 {
+  font-size: 1.15rem;
+  color: #e9e9f6;
+  margin: 0 0 0.75rem;
+  letter-spacing: 0.2px;
+  text-transform: none;
+  padding-left: 0;
+}
+
+.about-details .section-divider {
+  height: 1px;
+  margin: 0.9rem 0 0.8rem;
+  background: rgba(255,255,255,0.12);
+  border: 0;
+}
+
+
+.about-list,
+.tech-list {
+  list-style: disc inside;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1.2rem;
+}
+
+
+.about-list li {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  line-height: 1.6;
+  color: #fff;
+}
+
+#about .my-field-container,
+#about .about-details {
+  width: 100%;
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.tech-list {
+  grid-template-columns: repeat(2, minmax(0,1fr));
+}
+
+.tech-list li {
+  padding: 0.2rem 0;
+  border: 0;
+  background: transparent;
+  color: #ddd;
+}
+
+
+.my-field-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.my-field {
+  font-size: 1rem;
+  color: #ddd;
+  position: relative;
+  padding-left: 0.9rem;
+  text-align: center;
+}
+
+.page-section h2 {
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  padding-bottom: 0.4rem;
+  margin-bottom: 1rem;
+}
+
 
 .portfolio-wrapper {
     display: flex;
