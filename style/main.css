@@ -463,6 +463,14 @@ nav a {
     font-size: 1.3rem;
 }
 
+.project-card .tech-line {
+    margin-top: 1rem;
+    padding-top: 0.6rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    font-weight: 500;
+    color: #ccc;
+}
+
 .page-section p {
     font-size: 2rem;
     max-width: 600px;
