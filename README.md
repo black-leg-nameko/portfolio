@@ -1,4 +1,4 @@
-# BlackLeg-nameko's Portfolio
+# black-leg's Portfolio
 
 Welcome to my personal portfolio — a showcase of my projects, skills, and research in **Cybersecurity**, **AI**, and **Application Development**.
 
