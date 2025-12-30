@@ -1,10 +1,42 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { gsap, ScrollTrigger } from '../lib/gsap';
 const asset = (path: string) => `${import.meta.env.BASE_URL}assets/${path}`;
 
 export function Portfolio() {
   const ref = useRef<HTMLElement | null>(null);
   useScrollReveal(ref);
+
+  // Advanced: pinned timeline revealing cards as you scroll (desktop only)
+  useEffect(() => {
+    if (!ref.current) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (reduce.matches) return;
+    const mm = ScrollTrigger.matchMedia;
+    const ctx = gsap.context(() => {
+      mm({
+        '(min-width: 826px)': () => {
+          const cards = gsap.utils.toArray<HTMLElement>('.project-card', ref);
+          if (cards.length === 0) return;
+          gsap.set(cards, { autoAlpha: 0, y: 32 });
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: ref.current!,
+              start: 'top top',
+              end: '+=200%',
+              scrub: true,
+              pin: true,
+              anticipatePin: 1,
+            },
+          });
+          cards.forEach((card, i) => {
+            tl.to(card, { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power2.out' }, i === 0 ? 0.2 : '+=0.6');
+          });
+        },
+      });
+    }, ref);
+    return () => ctx.revert();
+  }, []);
   return (
     <section id="portfolio" className="page-section" ref={ref}>
       <h2 className="reveal">PORTFOLIO</h2>

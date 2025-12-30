@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { gsap } from '../lib/gsap';
 
 const asset = (path: string) => `${import.meta.env.BASE_URL}assets/${path}`;
 
@@ -6,6 +7,8 @@ export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
   const btnRef = useRef<HTMLDivElement | null>(null);
+  const avatarGifRef = useRef<HTMLImageElement | null>(null);
+  const avatarRef = useRef<HTMLImageElement | null>(null);
 
   useEffect(() => {
     function onDocClick(e: MouseEvent) {
@@ -19,6 +22,41 @@ export function Header() {
     }
     document.addEventListener('click', onDocClick);
     return () => document.removeEventListener('click', onDocClick);
+  }, []);
+
+  // Parallax micro-interactions for avatar elements
+  useEffect(() => {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (reduce.matches) return;
+    const ctx = gsap.context(() => {
+      if (avatarGifRef.current) {
+        gsap.to(avatarGifRef.current, {
+          yPercent: -20,
+          rotate: 8,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: document.body,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: true,
+          },
+        });
+      }
+      if (avatarRef.current) {
+        gsap.to(avatarRef.current, {
+          yPercent: 10,
+          rotate: -6,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: document.body,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: true,
+          },
+        });
+      }
+    });
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -57,6 +95,7 @@ export function Header() {
             src={asset('videos/torus-v2.gif')}
             alt="Cyber Glow"
             className="avatar-gif"
+            ref={avatarGifRef}
           />
           <nav>
             <a href="#contact">
@@ -64,6 +103,7 @@ export function Header() {
                 src={asset('images/meganeHacker_dog_icon2.png')}
                 alt="My Icon"
                 className="avatar"
+                ref={avatarRef}
               />
             </a>
           </nav>
