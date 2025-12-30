@@ -13,10 +13,9 @@ export function Hero() {
       </div>
       <div className="hero-overlay" />
       <div className="hero-content">
-        <h1 className="hero-title">PORTFOLIO</h1>
-        <p className="hero-sub">Cinematic Experience Inspired by Hathaway</p>
+        <h1 className="hero-title">black-leg</h1>
+        <p className="hero-sub">portfolio site</p>
       </div>
-      <div className="hero-scroll-cue">SCROLL</div>
     </section>
   );
 }
