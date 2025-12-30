@@ -480,8 +480,10 @@ nav a {
 
 .about-list,
 .tech-list {
-  list-style: disc outside;
-  gap: 1.2rem;
+  list-style: disc;
+  list-style-position: inside;
+  margin: 0;
+  padding-left: 0.8rem;
 }
 
 
@@ -501,7 +503,10 @@ nav a {
 }
 
 .tech-list {
+  display: grid;
   grid-template-columns: repeat(2, minmax(0,1fr));
+  column-gap: 1.25rem;
+  row-gap: 0.4rem;
 }
 
 .tech-list li {
@@ -511,6 +516,15 @@ nav a {
   color: #ddd;
 }
 
+/* bullet marker styling and spacing */
+.about-list li,
+.tech-list li {
+  padding-left: 0.25rem;
+}
+.about-list li::marker,
+.tech-list li::marker {
+  color: var(--accent-2);
+}
 
 .my-field-container {
   display: flex;
