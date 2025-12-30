@@ -1,10 +1,14 @@
+import { useRef } from 'react';
+import { useScrollReveal } from '../hooks/useScrollReveal';
 const asset = (path: string) => `${import.meta.env.BASE_URL}assets/${path}`;
 
 export function Portfolio() {
+  const ref = useRef<HTMLElement | null>(null);
+  useScrollReveal(ref);
   return (
-    <section id="portfolio" className="page-section">
-      <h2>PORTFOLIO</h2>
-      <div className="portfolio-wrapper">
+    <section id="portfolio" className="page-section" ref={ref}>
+      <h2 className="reveal">PORTFOLIO</h2>
+      <div className="portfolio-wrapper reveal">
         <div className="project-card">
           <img src={asset('images/ghost-protocol.png')} alt="ghost-ptorocol" />
           <h3>Ghost protocol<br/>(P2Pの新しい通信プロトコル)</h3>
