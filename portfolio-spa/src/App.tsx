@@ -1,4 +1,5 @@
-import { Header } from './components/Header';
+import { Navbar } from './components/Navbar';
+import { Hero } from './sections/Hero';
 import { About } from './sections/About';
 import { Portfolio } from './sections/Portfolio';
 import { Research } from './sections/Research';
@@ -8,7 +9,8 @@ import './App.css';
 export default function App() {
   return (
     <>
-      <Header />
+      <Navbar />
+      <Hero />
       <main>
         <About />
         <Portfolio />
