@@ -137,6 +137,9 @@ body {
 }
 
 @media (max-width: 825px) {
+    .nav-links {
+        display: none;
+    }
     .hamburger {
         display: flex !important;
     }
