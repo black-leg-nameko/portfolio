@@ -1,6 +1,5 @@
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
-import { gsap, ScrollTrigger } from '../lib/gsap';
 import { useTypewriter } from '../hooks/useTypewriter';
 import { useParallaxBg } from '../hooks/useParallaxBg';
 import { useSectionBg } from '../hooks/useSectionBg';
@@ -8,46 +7,12 @@ const asset = (path: string) => `${import.meta.env.BASE_URL}assets/${path}`;
 
 export function Portfolio() {
   const ref = useRef<HTMLElement | null>(null);
-  // Avoid animating .project-card here; handled by pinned timeline below
-  useScrollReveal(ref, '.reveal');
+  // Reveal headings and each project card smoothly (mobile-like behavior)
+  useScrollReveal(ref, '.reveal, .project-card');
   useTypewriter(ref, 'h2');
   useParallaxBg(ref, '.parallax-bg', -6, 10);
   useSectionBg(ref, '#07090f', '#0a0d14');
 
-  // Advanced: pinned timeline revealing cards as you scroll (desktop only)
-  useEffect(() => {
-    if (!ref.current) return;
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (reduce.matches) return;
-    const mm = ScrollTrigger.matchMedia;
-    const ctx = gsap.context(() => {
-      mm({
-        '(min-width: 826px)': () => {
-          const cards = gsap.utils.toArray<HTMLElement>('.project-card', ref.current!);
-          if (cards.length === 0) return;
-          gsap.set(cards, { autoAlpha: 0, y: 32 });
-          const tl = gsap.timeline({
-            scrollTrigger: {
-              trigger: ref.current!,
-              start: 'top top',
-              end: '+=120%',
-              scrub: true,
-              pin: true,
-              anticipatePin: 1,
-              pinSpacing: true,
-              invalidateOnRefresh: true,
-            },
-          });
-          cards.forEach((card, i) => {
-            // improve GPU compositing
-            gsap.set(card, { willChange: 'transform, opacity' });
-            tl.to(card, { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power2.out' }, i === 0 ? 0.2 : '+=0.6');
-          });
-        },
-      });
-    }, ref);
-    return () => ctx.revert();
-  }, []);
   return (
     <section id="portfolio" className="page-section" ref={ref}>
       <div className="parallax-bg" aria-hidden="true" />
