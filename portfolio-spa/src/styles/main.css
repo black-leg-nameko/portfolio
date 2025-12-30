@@ -424,6 +424,7 @@ nav a {
     align-items: center;
     position: relative;
     z-index: 1;
+    overflow-x: hidden; /* prevent inner effects from causing horizontal scroll */
 }
 
 .page-section h2 {
@@ -598,8 +599,27 @@ nav a {
     align-items: center;
 }
 
+.portfolio-grid {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+@media (max-width: 1100px) {
+    .portfolio-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+@media (max-width: 640px) {
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 .project-card {
-    width: 80%;
+    width: 100%;
     line-height: 1.4;
     text-align: center;
     border: 1px solid #ccc;
@@ -609,6 +629,26 @@ nav a {
     color: #fff;
     box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
     transition: transform 0.4s ease-in-out, box-shadow 0.4s ease;
+    overflow: hidden; /* keep media inside */
+}
+
+.card-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+    cursor: pointer;
+    text-decoration: none;
+    border: 0;
+    background: transparent;
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+}
+.card-button h3, .card-button h4 {
+    text-align: left;
+    word-break: break-word;
 }
 
 .project-card:hover {
@@ -641,6 +681,63 @@ nav a {
     color: #ccc;
 }
 
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(2px);
+    z-index: 2000;
+}
+.modal-panel {
+    position: fixed;
+    inset: 0;              /* cover viewport */
+    margin: auto;          /* center horizontally and vertically */
+    width: min(900px, calc(100vw - 2rem));
+    max-height: calc(100vh - 2rem);
+    border: 1px solid var(--line);
+    background: #0b0b0c;
+    color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 20px 80px rgba(0,0,0,0.6);
+    padding: 1rem;
+    z-index: 2001;
+    overflow: auto;
+    box-sizing: border-box;
+    margin: 0; /* neutralize dialog default margins */
+}
+.modal-close {
+    position: absolute;
+    top: 6px;
+    right: 10px;
+    color: #fff;
+    background: transparent;
+    border: 0;
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+}
+.modal-media img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+.modal-body {
+    padding: 0.75rem 0.25rem 0.25rem;
+}
+.modal-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.4rem;
+}
+.modal-desc {
+    color: #ddd;
+    line-height: 1.6;
+}
+.modal-tech {
+    margin-top: 0.6rem;
+    padding-top: 0.6rem;
+    border-top: 1px solid var(--line);
+    color: #ccc;
+}
 .page-section p {
     font-size: 2rem;
     max-width: 600px;
