@@ -45,10 +45,10 @@ export function Navbar() {
           ))}
         </nav>
         <div
-          className="hamburger"
+          className={`hamburger ${open ? 'open' : ''}`}
           ref={btnRef}
           role="button"
-          aria-label="Open menu"
+          aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
         >
