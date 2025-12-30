@@ -11,7 +11,7 @@ export function useScrollReveal(
     if (reduce.matches) return;
 
     const ctx = gsap.context(() => {
-      const elements = gsap.utils.toArray<HTMLElement>(selector, rootRef);
+      const elements = gsap.utils.toArray<HTMLElement>(selector, rootRef.current!);
       elements.forEach((el) => {
         gsap.fromTo(
           el,

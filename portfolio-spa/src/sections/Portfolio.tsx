@@ -22,7 +22,7 @@ export function Portfolio() {
     const ctx = gsap.context(() => {
       mm({
         '(min-width: 826px)': () => {
-          const cards = gsap.utils.toArray<HTMLElement>('.project-card', ref);
+          const cards = gsap.utils.toArray<HTMLElement>('.project-card', ref.current!);
           if (cards.length === 0) return;
           gsap.set(cards, { autoAlpha: 0, y: 32 });
           const tl = gsap.timeline({

@@ -7,7 +7,7 @@ export function useMaskedHeadings(rootRef: React.RefObject<HTMLElement | null>) 
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
     if (reduce.matches) return;
     const ctx = gsap.context(() => {
-      const headings = gsap.utils.toArray<HTMLElement>('h2', rootRef);
+      const headings = gsap.utils.toArray<HTMLElement>('h2', rootRef.current!);
       headings.forEach((h) => {
         gsap.set(h, { clipPath: 'inset(0 100% 0 0 round 2px)', autoAlpha: 0, y: 10 });
         gsap.to(h, {
