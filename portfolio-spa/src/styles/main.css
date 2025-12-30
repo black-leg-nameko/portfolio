@@ -419,6 +419,26 @@ nav a {
     padding-bottom: 0.4rem;
 }
 
+.page-section h2.typewriter {
+    position: relative;
+    display: inline-block;
+}
+.page-section h2.typewriter::after {
+    content: "|";
+    display: inline-block;
+    margin-left: 6px;
+    color: currentColor;
+    opacity: 0.9;
+    animation: caretBlink 1s steps(1) infinite;
+}
+.tw-char {
+    display: inline-block;
+}
+@keyframes caretBlink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
 .my-field-container {
     display: flex;
     flex-direction: column;
