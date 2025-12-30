@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { gsap } from '../lib/gsap';
+import { gsap, ScrollTrigger } from '../lib/gsap';
 
 function splitIntoSpans(el: HTMLElement): HTMLElement[] {
   const text = el.textContent || '';
@@ -33,23 +33,32 @@ export function useTypewriter(rootRef: React.RefObject<HTMLElement | null>, sele
           splitIntoSpans(h);
         }
         const chars = Array.from(h.querySelectorAll<HTMLElement>('.tw-char'));
-        gsap.set(chars, { autoAlpha: 0 });
-        gsap.fromTo(
-          chars,
-          { autoAlpha: 0 },
-          {
-            autoAlpha: 1,
-            duration: 0.02,
-            stagger: 0.03,
-            ease: 'none',
-            scrollTrigger: {
-              trigger: h,
-              start: 'top 85%',
-              once: true,
-              toggleActions: 'play none none none',
-            },
-          }
-        );
+        const tl = gsap.timeline({ paused: true });
+        tl.set(chars, { autoAlpha: 0 });
+        tl.to(chars, {
+          autoAlpha: 1,
+          duration: 0.02,
+          stagger: 0.03,
+          ease: 'none',
+        });
+        ScrollTrigger.create({
+          trigger: h,
+          start: 'top 85%',
+          onEnter: () => {
+            gsap.set(chars, { autoAlpha: 0 });
+            tl.restart(true, false);
+          },
+          onEnterBack: () => {
+            gsap.set(chars, { autoAlpha: 0 });
+            tl.restart(true, false);
+          },
+          onLeave: () => {
+            gsap.set(chars, { autoAlpha: 0 });
+          },
+          onLeaveBack: () => {
+            gsap.set(chars, { autoAlpha: 0 });
+          },
+        });
       });
     }, rootRef);
 
