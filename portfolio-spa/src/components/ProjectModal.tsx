@@ -1,4 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect } from 'react';
+import { pauseLenis, resumeLenis } from '../lib/lenis';
 
 type Project = {
   title: string;
@@ -16,6 +18,17 @@ export function ProjectModal({
   project: Project;
   onClose: () => void;
 }) {
+  // Lock body scroll while modal is open
+  useEffect(() => {
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    pauseLenis();
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      resumeLenis();
+    };
+  }, []);
+
   return (
     <AnimatePresence>
       <motion.div

@@ -27,4 +27,20 @@ export function initLenis(): void {
   lenisInstance = lenis;
 }
 
+export function pauseLenis(): void {
+  if (lenisInstance) {
+    // stop prevents Lenis from handling wheel/touch
+    // newer versions use .stop()/.start()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (lenisInstance as any).stop?.();
+  }
+}
+
+export function resumeLenis(): void {
+  if (lenisInstance) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (lenisInstance as any).start?.();
+  }
+}
+
 

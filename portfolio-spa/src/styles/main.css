@@ -692,8 +692,8 @@ nav a {
     position: fixed;
     inset: 0;              /* cover viewport */
     margin: auto;          /* center horizontally and vertically */
-    width: min(900px, calc(100vw - 2rem));
-    max-height: calc(100vh - 2rem);
+    width: min(780px, calc(100vw - 4rem));
+    max-height: calc(100vh - 4rem);
     border: 1px solid var(--line);
     background: #0b0b0c;
     color: #fff;
@@ -703,7 +703,9 @@ nav a {
     z-index: 2001;
     overflow: auto;
     box-sizing: border-box;
-    margin: 0; /* neutralize dialog default margins */
+    /* keep margin:auto for centering */
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
 }
 .modal-close {
     position: absolute;
