@@ -1,12 +1,19 @@
 import { useRef } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useMaskedHeadings } from '../hooks/useMaskedHeadings';
+import { useParallaxBg } from '../hooks/useParallaxBg';
+import { useSectionBg } from '../hooks/useSectionBg';
 
 export function About() {
   const ref = useRef<HTMLElement | null>(null);
   useScrollReveal(ref);
+  useMaskedHeadings(ref);
+  useParallaxBg(ref, '.parallax-bg', -8, 6);
+  useSectionBg(ref, '#05080f', '#0a0d18');
 
   return (
     <section id="about" className="page-section" ref={ref}>
+      <div className="parallax-bg" aria-hidden="true" />
       <h2 className="reveal">ABOUT ME</h2>
       <div className="my-field-container reveal">
         <h3 className="my-field">Cyber Security</h3>

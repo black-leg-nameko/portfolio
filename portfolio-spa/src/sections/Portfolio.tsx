@@ -1,11 +1,17 @@
 import { useEffect, useRef } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { gsap, ScrollTrigger } from '../lib/gsap';
+import { useMaskedHeadings } from '../hooks/useMaskedHeadings';
+import { useParallaxBg } from '../hooks/useParallaxBg';
+import { useSectionBg } from '../hooks/useSectionBg';
 const asset = (path: string) => `${import.meta.env.BASE_URL}assets/${path}`;
 
 export function Portfolio() {
   const ref = useRef<HTMLElement | null>(null);
   useScrollReveal(ref);
+  useMaskedHeadings(ref);
+  useParallaxBg(ref, '.parallax-bg', -6, 10);
+  useSectionBg(ref, '#07090f', '#0a0d14');
 
   // Advanced: pinned timeline revealing cards as you scroll (desktop only)
   useEffect(() => {
@@ -39,6 +45,7 @@ export function Portfolio() {
   }, []);
   return (
     <section id="portfolio" className="page-section" ref={ref}>
+      <div className="parallax-bg" aria-hidden="true" />
       <h2 className="reveal">PORTFOLIO</h2>
       <div className="portfolio-wrapper reveal">
         <div className="project-card">

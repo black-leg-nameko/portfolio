@@ -1,11 +1,18 @@
 import { useRef } from 'react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useMaskedHeadings } from '../hooks/useMaskedHeadings';
+import { useParallaxBg } from '../hooks/useParallaxBg';
+import { useSectionBg } from '../hooks/useSectionBg';
 
 export function Contact() {
   const ref = useRef<HTMLElement | null>(null);
   useScrollReveal(ref);
+  useMaskedHeadings(ref);
+  useParallaxBg(ref, '.parallax-bg', -5, 8);
+  useSectionBg(ref, '#070a12', '#0a0f16');
   return (
     <section id="contact" className="page-section" ref={ref}>
+      <div className="parallax-bg" aria-hidden="true" />
       <h2 className="reveal">CONTACT</h2>
       <p>mail: ryutokitajima14@gmail.com</p>
       <div className="contact-links reveal">
