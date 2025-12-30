@@ -8,7 +8,8 @@ const asset = (path: string) => `${import.meta.env.BASE_URL}assets/${path}`;
 
 export function Portfolio() {
   const ref = useRef<HTMLElement | null>(null);
-  useScrollReveal(ref);
+  // Avoid animating .project-card here; handled by pinned timeline below
+  useScrollReveal(ref, '.reveal');
   useTypewriter(ref, 'h2');
   useParallaxBg(ref, '.parallax-bg', -6, 10);
   useSectionBg(ref, '#07090f', '#0a0d14');
@@ -29,13 +30,17 @@ export function Portfolio() {
             scrollTrigger: {
               trigger: ref.current!,
               start: 'top top',
-              end: '+=200%',
+              end: '+=120%',
               scrub: true,
               pin: true,
               anticipatePin: 1,
+              pinSpacing: true,
+              invalidateOnRefresh: true,
             },
           });
           cards.forEach((card, i) => {
+            // improve GPU compositing
+            gsap.set(card, { willChange: 'transform, opacity' });
             tl.to(card, { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power2.out' }, i === 0 ? 0.2 : '+=0.6');
           });
         },
