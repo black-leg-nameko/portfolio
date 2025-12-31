@@ -30,10 +30,9 @@ body {
     background: radial-gradient(ellipse at center, var(--bg-start, #000000) 0%, var(--bg-end, #0a0a0a) 100%);
     color: #fff;
     font-family: 'Space Grotesk', sans-serif;
-    height: 100vh;
+    min-height: 100vh;   /* allow page to grow naturally */
+    height: auto;
     display: block;
-    justify-content: center;
-    align-items: center;
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -412,16 +411,13 @@ nav a {
 
 .page-section {
     /*height: 100vh;*/
-    min-height: 100vh;
+    min-height: auto;
     padding: 4rem;
     background: rgba(0, 255, 255, 0.03);
     border-top: 1px solid rgba(0, 255, 255, 0.1);
     font-family: 'Space Grotesk', sans-serif;
-    display: flex;
+    display: block;        /* natural flow */
     color: #fff;
-    flex-direction :column;
-    justify-content: center;
-    align-items: center;
     position: relative;
     z-index: 1;
     overflow-x: hidden; /* prevent inner effects from causing horizontal scroll */
@@ -706,6 +702,8 @@ nav a {
     /* keep margin:auto for centering */
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
+    display: flex;
+    flex-direction: column;
 }
 .modal-close {
     position: absolute;
@@ -718,16 +716,24 @@ nav a {
     line-height: 1;
     cursor: pointer;
 }
+.modal-media {
+    flex: 0 0 auto;
+    max-height: 48vh;              /* limit media height for smaller overall card */
+    overflow: hidden;
+}
 .modal-media img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: contain;           /* keep full image visible within the cap */
     border-radius: 8px;
 }
 .modal-body {
+    flex: 1 1 auto;
     padding: 0.75rem 0.25rem 0.25rem;
+    overflow: auto;                /* allow body to scroll if content exceeds */
 }
 .modal-title {
-    font-size: 1.5rem;
+    font-size: 1.35rem;            /* slightly smaller to reduce overall height */
     margin-bottom: 0.4rem;
 }
 .modal-desc {
