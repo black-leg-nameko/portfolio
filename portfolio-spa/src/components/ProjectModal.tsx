@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { pauseLenis, resumeLenis } from '../lib/lenis';
 
 type Project = {
@@ -18,6 +18,7 @@ export function ProjectModal({
   project: Project;
   onClose: () => void;
 }) {
+  const [imageFull, setImageFull] = useState(false);
   // Lock body scroll while modal is open
   useEffect(() => {
     const prevOverflow = document.body.style.overflow;
@@ -40,7 +41,7 @@ export function ProjectModal({
       />
       <motion.dialog
         id={id}
-        className="modal-panel"
+        className={`modal-panel ${imageFull ? 'full-image' : ''}`}
         aria-modal="true"
         open
         initial={{ opacity: 0, scale: 0.96, y: 10 }}
@@ -50,8 +51,21 @@ export function ProjectModal({
         onClick={(e) => e.stopPropagation()}
       >
         <button className="modal-close" onClick={onClose} aria-label="Close details">×</button>
+        <button
+          className="modal-toggle"
+          onClick={() => setImageFull((v) => !v)}
+          aria-label={imageFull ? 'Shrink image' : 'Expand image'}
+          title={imageFull ? 'Shrink image' : 'Expand image'}
+        >
+          {imageFull ? 'Fit to card' : 'View full image'}
+        </button>
         <div className="modal-media">
-          <img src={project.img} alt="" />
+          <img
+            src={project.img}
+            alt=""
+            onClick={() => setImageFull((v) => !v)}
+            style={{ cursor: imageFull ? 'zoom-out' : 'zoom-in' }}
+          />
         </div>
         <div className="modal-body">
           <h3 className="modal-title" dangerouslySetInnerHTML={{ __html: project.title }} />
