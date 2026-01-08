@@ -167,6 +167,13 @@ body {
         text-decoration: underline;
     }
     
+    /* make sections full-width on mobile and ease side padding */
+    .page-section {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        width: 100%;
+        align-items: stretch; /* allow children to use full width */
+    }
 
     .avatar {
         margin-top: 50px;
@@ -237,6 +244,28 @@ body {
 
     .project-card h4 {
         font-size: 0.6rem !important;
+    }
+    
+    /* widen ABOUT content on mobile */
+    #about .my-field-container {
+        max-width: none;
+        width: 100%;
+        align-items: flex-start;
+        margin: 0 0 1rem 0;
+    }
+    #about .about-details {
+        max-width: none;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        box-shadow: none;
+        border-radius: 0;
+    }
+    #about .about-list {
+        list-style-position: outside;
+        padding-left: 1.25rem;
     }
 }
 
@@ -412,6 +441,7 @@ nav a {
 .page-section {
     /* make each section fill the viewport height */
     min-height: 100vh;
+    width: 100%;
     padding: 4rem;
     background: rgba(0, 255, 255, 0.03);
     border-top: 1px solid rgba(0, 255, 255, 0.1);
