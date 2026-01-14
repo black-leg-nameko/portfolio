@@ -625,9 +625,20 @@ nav a {
   margin-inline: auto;
 }
 
+/* Align ABOUT ME heading start with the About content container */
+#about h2 {
+  display: block;
+  width: min(900px, 92vw);
+  margin-inline: auto;
+  text-align: left;
+}
+#about h2.typewriter {
+  display: block;
+}
+
 .tech-list {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0,1fr));
+  grid-template-columns: 1fr;
   column-gap: 1.25rem;
   row-gap: 0.4rem;
 }
@@ -647,6 +658,32 @@ nav a {
 .about-list li::marker,
 .tech-list li::marker {
   color: var(--accent-2);
+}
+
+.about-list,
+.tech-list {
+  list-style: disc outside;
+}
+
+/* Align bullet text start consistently in ABOUT */
+#about .about-list,
+#about .tech-list {
+  padding-left: 1.1rem;
+  margin-left: 0;
+}
+#about .about-list li,
+#about .tech-list li {
+  padding-left: 0;
+  text-indent: 0;
+}
+
+/* Ensure ABOUT lists always left-align text */
+#about .about-details,
+#about .about-list,
+#about .tech-list,
+#about .about-list li,
+#about .tech-list li {
+  text-align: left;
 }
 
 .my-field-container {
