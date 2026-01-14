@@ -20,6 +20,39 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Improve initial rendering performance for sectioned layout */
+.page-section {
+    content-visibility: auto;
+    contain-intrinsic-size: 900px;
+}
+
+/* Respect users who prefer reduced motion and lighten effects */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto !important;
+    }
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    .nav-root {
+        backdrop-filter: none !important;
+    }
+}
+
+/* Mobile-specific effect trimming */
+@media (max-width: 480px) {
+    .nav-root {
+        backdrop-filter: none;
+    }
+    .hero-bg {
+        filter: saturate(1.0) contrast(1.0) brightness(0.9);
+        transform: none;
+    }
+}
+
 * {
     margin: 0;
     padding: 0;

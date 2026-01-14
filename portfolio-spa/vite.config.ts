@@ -5,4 +5,24 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   base: '/portfolio/',
+  build: {
+    target: 'es2020',
+    cssMinify: true,
+    modulePreload: {
+      polyfill: false,
+    },
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ['react', 'react-dom'],
+          router: ['react-router-dom'],
+          motion: ['framer-motion'],
+          gsap: ['gsap'],
+        },
+      },
+    },
+  },
+  esbuild: {
+    drop: ['console', 'debugger'],
+  },
 })

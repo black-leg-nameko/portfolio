@@ -68,7 +68,7 @@ export function Portfolio() {
             aria-haspopup="dialog"
             aria-controls="project-detail"
           >
-            <img src={p.img} alt={p.title} />
+            <img src={p.img} alt={p.title} loading="lazy" decoding="async" />
             <h3 dangerouslySetInnerHTML={{ __html: p.title.replace('\n', '<br/>') }} />
             <h4>{p.desc}</h4>
             <h4 className="tech-line">{p.tech}</h4>

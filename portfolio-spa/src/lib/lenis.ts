@@ -8,6 +8,9 @@ export function initLenis(): void {
 
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   if (reduce.matches) return;
+  // Avoid smooth scrolling on touch/coarse pointers (mobile) to reduce jank
+  const coarse = window.matchMedia('(pointer: coarse)');
+  if (coarse.matches) return;
 
   const lenis = new Lenis({
     smoothWheel: true,

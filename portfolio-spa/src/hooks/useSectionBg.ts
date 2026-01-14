@@ -8,6 +8,8 @@ export function useSectionBg(
 ) {
   useEffect(() => {
     if (!rootRef.current) return;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (reduce.matches) return;
     const ctx = gsap.context(() => {
       gsap.to(document.documentElement, {
         duration: 1,
