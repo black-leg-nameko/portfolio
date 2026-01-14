@@ -26,6 +26,14 @@ html {
     contain-intrinsic-size: 900px;
 }
 
+/* On coarse pointers (mobile), avoid content-visibility to prevent blanking/flicker */
+@media (pointer: coarse) {
+    .page-section {
+        content-visibility: visible;
+        contain-intrinsic-size: auto;
+    }
+}
+
 /* Respect users who prefer reduced motion and lighten effects */
 @media (prefers-reduced-motion: reduce) {
     html {
@@ -50,6 +58,13 @@ html {
     .hero-bg {
         filter: saturate(1.0) contrast(1.0) brightness(0.9);
         transform: none;
+    }
+}
+
+/* Also drop heavy backdrop-filter on all coarse pointers (not just narrow widths) */
+@media (pointer: coarse) {
+    .nav-root {
+        backdrop-filter: none !important;
     }
 }
 

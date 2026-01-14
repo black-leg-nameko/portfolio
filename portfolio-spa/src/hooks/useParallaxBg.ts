@@ -11,6 +11,8 @@ export function useParallaxBg(
     if (!rootRef.current) return;
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
     if (reduce.matches) return;
+    const coarse = window.matchMedia('(pointer: coarse)');
+    if (coarse.matches) return;
     const ctx = gsap.context(() => {
       const el = rootRef.current!.querySelector<HTMLElement>(selector);
       if (!el) return;

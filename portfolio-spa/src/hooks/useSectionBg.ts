@@ -10,6 +10,8 @@ export function useSectionBg(
     if (!rootRef.current) return;
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
     if (reduce.matches) return;
+    const coarse = window.matchMedia('(pointer: coarse)');
+    if (coarse.matches) return;
     const ctx = gsap.context(() => {
       gsap.to(document.documentElement, {
         duration: 1,
