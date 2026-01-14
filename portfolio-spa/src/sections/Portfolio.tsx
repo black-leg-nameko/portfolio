@@ -24,6 +24,12 @@ export function Portfolio() {
 
   const projects = [
     {
+      title: 'AegisID protocol (分散型ID認証プロトコル)',
+      img: asset('images/aegis-id-oidc.svg'),
+      desc: 'A decentralized ID and verifiable credentials platform that combines SD-JWT, DID, WebAuthn, and OIDC. Achieves both privacy and interoperability through self-sovereign identity.',
+      tech: 'Technologies: SD-JWT, DID, WebAuthn, OIDC',
+    },
+    {
       title: 'Ghost protocol (P2Pの新しい通信プロトコル)',
       img: asset('images/ghost-protocol.png'),
       desc: 'In this protocol, a node’s Ghost persona—the key pair `sk_e`/`pk_e` and its derived address—is regenerated and updated each Epoch.',
