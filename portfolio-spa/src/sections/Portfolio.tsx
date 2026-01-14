@@ -26,7 +26,7 @@ export function Portfolio() {
     {
       title: 'AegisID protocol (分散型ID認証プロトコル)',
       img: asset('images/aegis-id-oidc.svg'),
-      desc: 'SD-JWT・DID・WebAuthn・OIDC を組み合わせた分散型ID/検証可能クレデンシャル基盤。自己主権IDで秘匿性と相互運用性を両立。',
+      desc: 'A decentralized ID and verifiable credentials platform that combines SD-JWT, DID, WebAuthn, and OIDC. Achieves both privacy and interoperability through self-sovereign identity.',
       tech: 'Technologies: SD-JWT, DID, WebAuthn, OIDC',
     },
     {
