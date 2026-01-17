@@ -14,7 +14,7 @@ export function Contact() {
     <section id="contact" className="page-section" ref={ref}>
       <div className="parallax-bg" aria-hidden="true" />
       <h2 className="reveal typewriter">CONTACT</h2>
-      <p>mail: </p>
+      <p>e-mail: blacklegnameko14@gmail.com</p>
       <div className="contact-links reveal">
         <a href="https://github.com/black-leg-nameko" target="_blank" className="contact-link" rel="noreferrer">
           <i className="fab fa-github"></i> GitHub
