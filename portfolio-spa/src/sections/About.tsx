@@ -33,7 +33,7 @@ export function About() {
           <li>
             Developed a neural network-based vulnerability diagnosis tool (NNAST) under the AKATSUKI project (Fukuoka Mitou).{" "}
             <a href="https://mitou-fukuoka.org/works/nnast/" target="_blank" rel="noreferrer">
-              Details (URL:mitou-fukuoka.org) ↗
+              Details (URL:mitou-fukuoka.org) ↗ [https://mitou-fukuoka.org/works/nnast/]
             </a>
           </li>
           <li>
