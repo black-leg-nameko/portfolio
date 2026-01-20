@@ -2,7 +2,7 @@
 
 Welcome to my personal portfolio — a showcase of my projects, skills, and research in **Cybersecurity**, **AI**, and **Application Development**.
 
-**Live Site**: [black-leg-nameko.github.io/portfolio](https://black-leg-nameko.github.io/portfolio/)
+**Live Site**: [portfolio](https://portfolio-nine-lemon-74.vercel.app/)
 
 ---
 
