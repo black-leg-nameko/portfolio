@@ -48,6 +48,8 @@ export function About() {
           <li>Programming: C/C++. Scala</li>
           <li>Web Development: Laravel, Next.js</li>
           <li>AI/ML: PyTorch</li>
+          <li>AWS: Hands-on experience in production environment</li>
+          <li>AWS & GCP:  Used for research experiments and prototyping</li>
         </ul>
       </div>
     </section>
