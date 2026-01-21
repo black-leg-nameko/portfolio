@@ -37,7 +37,7 @@ export function About() {
             </a>
           </li>
           <li>
-            In my cybersecurity research, I regularly implement Proofs-of-Concept (PoCs).
+            In my cybersecurity research, I regularly implement PoCs.
           </li>
         </ul>
 
