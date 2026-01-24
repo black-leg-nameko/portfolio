@@ -17,7 +17,7 @@ export function Research() {
       <div className="my-field-container reveal">
         <h3 className="my-field">Blockchain</h3>
         <h3 className="my-field">NFT Security</h3>
-        <h3 className="my-field">AI</h3>
+        <h3 className="my-field">LLM Security</h3>
       </div>
     </section>
   );
