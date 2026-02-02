@@ -721,13 +721,13 @@ nav a {
 
 .portfolio-grid {
     width: 100%;
-    max-width: 1100px;
+    max-width: 1280px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.25rem;
 }
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
     .portfolio-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -814,8 +814,8 @@ nav a {
     position: fixed;
     inset: 0;              /* cover viewport */
     margin: auto;          /* center horizontally and vertically */
-    width: min(60vw, 680px);        /* viewport-relative, smaller on desktop */
-    max-height: 70vh;               /* viewport-relative height cap */
+    width: min(85vw, 960px);        /* wider so image fits in default state */
+    max-height: 90vh;       /* cap so modal stays in viewport */
     border: 1px solid var(--line);
     background: #0b0b0c;
     color: #fff;
@@ -823,11 +823,8 @@ nav a {
     box-shadow: 0 20px 80px rgba(0,0,0,0.6);
     padding: 1rem;
     z-index: 2001;
-    overflow: auto;
+    overflow: hidden;       /* no vertical scroll; height follows content */
     box-sizing: border-box;
-    /* keep margin:auto for centering */
-    overscroll-behavior: contain;
-    -webkit-overflow-scrolling: touch;
     display: flex;
     flex-direction: column;
 }
@@ -840,6 +837,7 @@ nav a {
 }
 .modal-panel.full-image .modal-media {
     flex: 1 1 auto;
+    width: 100%;
     max-height: 90vh;
 }
 .modal-panel.full-image .modal-media img {
@@ -870,21 +868,135 @@ nav a {
     font-size: 0.8rem;
     cursor: pointer;
 }
+/* Two-column layout: image left, text right; height follows content (no scroll) */
+.modal-content-row {
+    display: flex;
+    flex-direction: row;
+    flex: 0 0 auto;        /* height by content so desc fits fully */
+    min-height: 0;
+    gap: 1rem;
+    overflow: visible;
+}
+@media (max-width: 640px) {
+    .modal-content-row {
+        flex-direction: column;
+    }
+}
 .modal-media {
     flex: 0 0 auto;
-    max-height: 40vh;              /* smaller media to reduce overall size */
+    width: min(52%, 480px);        /* left column: full image fits in default state */
+    max-height: 75vh;
     overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+@media (max-width: 640px) {
+    .modal-media {
+        width: 100%;
+        max-height: 45vh;
+    }
 }
 .modal-media img {
     width: 100%;
     height: 100%;
-    object-fit: contain;           /* keep full image visible within the cap */
+    max-height: 75vh;
+    object-fit: contain;
+    object-position: left top;     /* full image fits on the left */
     border-radius: 8px;
+}
+@media (max-width: 640px) {
+    .modal-media img {
+        max-height: 45vh;
+    }
+}
+
+/* Slider wrapper: position hint buttons */
+.modal-media-slider-wrap {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+}
+.modal-slider-hint {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2rem;
+    height: 2.5rem;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(0,0,0,0.35);
+    color: rgba(255,255,255,0.7);
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+    z-index: 2;
+}
+.modal-slider-hint:hover {
+    border-color: rgba(255,255,255,0.45);
+    background: rgba(0,0,0,0.5);
+    color: rgba(255,255,255,0.9);
+}
+.modal-slider-hint-prev {
+    left: 4px;
+}
+.modal-slider-hint-next {
+    right: 4px;
+}
+
+/* Horizontal image slider in modal (e.g. NNAST1 → NNAST2) */
+.modal-media-slider {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    max-height: 75vh;
+    border-radius: 8px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.modal-media-slider::-webkit-scrollbar {
+    display: none;
+}
+@media (max-width: 640px) {
+    .modal-media-slider {
+        max-height: 45vh;
+    }
+}
+.modal-media-slider .modal-slide-img {
+    flex: 0 0 100%;
+    min-width: 100%;
+    width: 100%;
+    height: auto;
+    max-height: 75vh;
+    object-fit: contain;
+    object-position: left top;     /* NNAST1.png etc. fit entirely in default state */
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+@media (max-width: 640px) {
+    .modal-media-slider .modal-slide-img {
+        max-height: 45vh;
+    }
+}
+.modal-panel.full-image .modal-media-slider {
+    max-height: 90vh;
+}
+.modal-panel.full-image .modal-media-slider .modal-slide-img {
+    max-height: 90vh;
 }
 .modal-body {
     flex: 1 1 auto;
+    min-width: 0;                 /* allow shrink in row layout */
     padding: 0.75rem 0.25rem 0.25rem;
-    overflow: auto;                /* allow body to scroll if content exceeds */
+    overflow: visible;            /* no scroll; full desc shown, card height follows */
 }
 .modal-title {
     font-size: 1.35rem;            /* slightly smaller to reduce overall height */
