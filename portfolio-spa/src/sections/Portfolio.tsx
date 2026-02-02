@@ -24,16 +24,17 @@ export function Portfolio() {
 
   const projects = [
     {
+      title: 'NNAST (GNN+LLM型脆弱性診断ツール)',
+      img: asset('images/NNAST1.png'),
+      images: [asset('images/NNAST1.png'), asset('images/NNAST2.png')],
+      desc: 'An AI-driven security system that automatically analyzes web app code—from vulnerability detection to fix suggestions. It builds a Code Property Graph (CPG), uses a GNN to infer vulnerable locations, an LLM to generate patch code, and opens GitHub issues for the findings.',
+      tech: 'Tech: PyTorch, GNN, LLM',
+    },
+    {
       title: 'AegisID protocol (分散型ID認証プロトコル)',
       img: asset('images/aegis-id-oidc.svg'),
       desc: 'A decentralized ID and verifiable credentials platform that combines SD-JWT, DID, WebAuthn, and OIDC. Achieves both privacy and interoperability through self-sovereign identity.',
       tech: 'Tech: SD-JWT, DID, WebAuthn, OIDC',
-    },
-    {
-      title: 'Ghost protocol (P2Pの新しい通信プロトコル)',
-      img: asset('images/ghost-protocol.png'),
-      desc: 'In this protocol, a node’s Ghost persona—the key pair `sk_e`/`pk_e` and its derived address—is regenerated and updated each Epoch.',
-      tech: 'Tech: Rust, AEAD, P2P',
     },
     {
       title: 'Rust-based /proc Scanner',
