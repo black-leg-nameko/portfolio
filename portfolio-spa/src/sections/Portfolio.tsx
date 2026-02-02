@@ -64,7 +64,7 @@ export function Portfolio() {
       title: 'Rubik\'s Cube Solver',
       img: asset('images/rubikdemo.gif'),
       desc: 'A browser-based 3D Rubik\'s Cube simulator and automated solver built with Three.js and the Kociemba algorithm. This project demonstrates 3D manipulation, animation queuing, and the integration of complex combinatorial algorithms in a web environment.',
-      tech: 'Tech: Three.js, Cube.js, HTML/CSS',
+      tech: 'Tech: Three.js, HTML/CSS',
     },
   ];
 
