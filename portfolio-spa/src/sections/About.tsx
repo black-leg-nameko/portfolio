@@ -31,7 +31,7 @@ export function About() {
             Internship experience in implementing security access functions for in-vehicle software, focusing on encryption-based mechanisms to enhance automotive cybersecurity.
           </li>
           <li>
-            Developed a neural network-based vulnerability diagnosis tool (NNAST) under the AKATSUKI project (Fukuoka Mitou).{" "}
+            Selected for the AKATSUKI project "Fukuoka Mitou" 2025.{" "}
             <a href="https://mitou-fukuoka.org/works/nnast/" target="_blank" rel="noreferrer">
               Details (URL:mitou-fukuoka.org) ↗ [https://mitou-fukuoka.org/works/nnast/]
             </a>
