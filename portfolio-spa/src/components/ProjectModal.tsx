@@ -1,11 +1,12 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { pauseLenis, resumeLenis } from '../lib/lenis';
 
 type Project = {
   title: string;
   img: string;
+  images?: string[];
   desc: string;
   tech: string;
 };
@@ -20,6 +21,15 @@ export function ProjectModal({
   onClose: () => void;
 }) {
   const [imageFull, setImageFull] = useState(false);
+  const sliderRef = useRef<HTMLDivElement | null>(null);
+
+  const scrollSlider = (direction: 'left' | 'right') => {
+    const el = sliderRef.current;
+    if (!el) return;
+    const step = el.clientWidth;
+    el.scrollBy({ left: direction === 'right' ? step : -step, behavior: 'smooth' });
+  };
+
   // Lock body scroll while modal is open
   useEffect(() => {
     const prevOverflow = document.body.style.overflow;
@@ -61,18 +71,53 @@ export function ProjectModal({
           >
             {imageFull ? 'Fit to card' : 'View full image'}
           </button>
+          <div className="modal-content-row">
           <div className="modal-media">
-            <img
-              src={project.img}
-              alt=""
-              onClick={() => setImageFull((v) => !v)}
-              style={{ cursor: imageFull ? 'zoom-out' : 'zoom-in' }}
-            />
+            {(project.images && project.images.length > 1) ? (
+              <div className="modal-media-slider-wrap">
+                <div
+                  ref={sliderRef}
+                  className="modal-media-slider"
+                  onClick={() => setImageFull((v) => !v)}
+                  style={{ cursor: imageFull ? 'zoom-out' : 'zoom-in' }}
+                  role="img"
+                  aria-label="Project images, scroll horizontally to see more"
+                >
+                  {project.images.map((src, idx) => (
+                    <img key={idx} src={src} alt="" className="modal-slide-img" />
+                  ))}
+                </div>
+                <button
+                  type="button"
+                  className="modal-slider-hint modal-slider-hint-prev"
+                  onClick={(e) => { e.stopPropagation(); scrollSlider('left'); }}
+                  aria-label="Previous image"
+                >
+                  ‹
+                </button>
+                <button
+                  type="button"
+                  className="modal-slider-hint modal-slider-hint-next"
+                  onClick={(e) => { e.stopPropagation(); scrollSlider('right'); }}
+                  aria-label="Next image"
+                >
+                  ›
+                </button>
+              </div>
+            ) : (
+              <img
+                src={project.img}
+                alt=""
+                onClick={() => setImageFull((v) => !v)}
+                style={{ cursor: imageFull ? 'zoom-out' : 'zoom-in' }}
+              />
+            )}
           </div>
           <div className="modal-body">
             <h3 className="modal-title" dangerouslySetInnerHTML={{ __html: project.title }} />
             <p className="modal-desc">{project.desc}</p>
             <p className="modal-tech">{project.tech}</p>
+          </div>
           </div>
         </motion.dialog>
       </AnimatePresence>
