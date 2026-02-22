@@ -702,6 +702,148 @@ nav a {
   text-align: center;
 }
 
+/* Research section styles */
+#research .my-field-container,
+#research .research-details {
+  width: 100%;
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+#research h2 {
+  display: block;
+  width: min(900px, 92vw);
+  margin-inline: auto;
+  text-align: left;
+}
+
+.research-details {
+  width: min(900px, 92vw);
+  margin-top: 2rem;
+  padding: 1.25rem 1.25rem 1rem;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.02);
+  border-radius: 10px;
+  box-shadow: none;
+}
+
+.research-details h3 {
+  font-size: 1.15rem;
+  color: #e9e9f6;
+  margin: 0 0 1rem;
+  letter-spacing: 0.2px;
+  text-transform: none;
+  padding-left: 0;
+}
+
+.publications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.publication-item {
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.publication-item:last-child {
+  border-bottom: none;
+}
+
+.publication-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.publication-title {
+  font-size: 1rem;
+  color: #fff;
+  margin: 0;
+  font-weight: 400;
+  line-height: 1.5;
+  flex: 1;
+}
+
+.publication-title a {
+  color: #e0e0ff;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.publication-title a:hover {
+  color: var(--accent-2);
+  text-decoration: underline;
+}
+
+.publication-type {
+  font-size: 0.75rem;
+  color: var(--accent-2);
+  background: rgba(124, 227, 255, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.publication-authors {
+  font-size: 0.9rem;
+  color: #ddd;
+  margin-bottom: 0.4rem;
+  line-height: 1.5;
+}
+
+.publication-venue {
+  font-size: 0.9rem;
+  color: #bbb;
+  font-style: italic;
+  margin-bottom: 0.4rem;
+}
+
+.publication-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.85rem;
+  color: #aaa;
+  flex-wrap: wrap;
+}
+
+.publication-date {
+  color: #aaa;
+}
+
+.publication-doi {
+  color: #aaa;
+}
+
+.publication-doi a {
+  color: var(--accent-2);
+  text-decoration: none;
+}
+
+.publication-doi a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .publication-header {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .publication-type {
+    align-self: flex-start;
+  }
+  
+  .publication-meta {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+}
+
 .page-section h2 {
   text-decoration: none;
   border-bottom: 1px solid rgba(255,255,255,0.12);
