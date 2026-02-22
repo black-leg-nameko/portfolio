@@ -60,20 +60,17 @@ export function Research() {
             {publications.map((pub, index) => (
               <div key={index} className="publication-item">
                 <div className="publication-header">
-                  <h4 className="publication-title">
-                    {pub.link ? (
-                      <a href={pub.link} target="_blank" rel="noopener noreferrer">
-                        {pub.title}
-                      </a>
-                    ) : (
-                      pub.title
-                    )}
-                  </h4>
+                  <h4 className="publication-title">{pub.title}</h4>
                 </div>
                 <div className="publication-authors">{formatAuthors(pub.authors)}</div>
                 <div className="publication-venue">{pub.venue}</div>
                 <div className="publication-meta">
                   <span className="publication-date">{pub.date}</span>
+                  {pub.link && (
+                    <span className="publication-link">
+                      <a href={pub.link} target="_blank" rel="noopener noreferrer">{pub.link}</a>
+                    </span>
+                  )}
                   {pub.doi && (
                     <span className="publication-doi">
                       DOI: <a href={`https://doi.org/${pub.doi}`} target="_blank" rel="noopener noreferrer">{pub.doi}</a>

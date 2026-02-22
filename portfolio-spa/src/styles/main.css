@@ -815,6 +815,20 @@ nav a {
   color: #aaa;
 }
 
+.publication-link {
+  color: #aaa;
+}
+
+.publication-link a {
+  color: var(--accent-2);
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.publication-link a:hover {
+  text-decoration: underline;
+}
+
 .publication-doi {
   color: #aaa;
 }
