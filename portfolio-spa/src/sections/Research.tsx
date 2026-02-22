@@ -15,8 +15,7 @@ export function Research() {
       <div className="parallax-bg" aria-hidden="true" />
       <h2 className="reveal typewriter">RESEARCH &amp; PUBLICATIONS</h2>
       <div className="my-field-container reveal">
-        <h3 className="my-field">Blockchain</h3>
-        <h3 className="my-field">NFT Security</h3>
+        <h3 className="my-field">Blockchain Security</h3>
         <h3 className="my-field">LLM Security</h3>
       </div>
     </section>
