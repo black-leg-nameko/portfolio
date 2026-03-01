@@ -38,6 +38,13 @@ export function Research() {
       date: '2026年3月',
       link: 'https://pub.confit.atlas.jp/ja/event/general2026/presentation/A-12-03',
     },
+    {
+      title: 'クロスチェーンブリッジ遅延の予測に基づく時間的不整合脆弱性の機械学習的評価',
+      authors: ['北島琉斗', '櫻井幸一'],
+      venue: '第112回CSEC',
+      date: '2026年3月',
+      link: 'https://www.ipsj.or.jp/kenkyukai/event/dps206csec112.html',
+    },
   ];
 
   const formatAuthors = (authors: string[]): string => {
