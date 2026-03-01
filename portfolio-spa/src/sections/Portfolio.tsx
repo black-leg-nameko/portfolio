@@ -25,8 +25,8 @@ export function Portfolio() {
   const projects = [
     {
       title: 'LeftaR',
-      img: asset('images/LeftaR-demo1.jpeg'),
-      images: [asset('images/LeftaR-demo1.jpeg'), asset('images/LeftaR-demo2.jpeg')],
+      img: asset('images/LeftaR3.jpeg'),
+      images: [asset('images/LeftaR3.jpeg'), asset('images/LeftaR4.jpeg'), asset('images/LeftaR-demo2.jpeg')],
       desc: 'AR-based rehabilitation tool for people with Unilateral Spatial Neglect (USN), especially those who tend to ignore stimuli on the left side. The core exercise is simple: a friendly 3D dog appears in the user’s real environment on the left, and the user must find and tap it.',
       tech: 'Tech: Swift',
     },
