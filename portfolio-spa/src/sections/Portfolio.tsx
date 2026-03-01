@@ -24,6 +24,13 @@ export function Portfolio() {
 
   const projects = [
     {
+      title: 'LeftaR',
+      img: asset('images/LeftaR-demo1.jpeg'),
+      images: [asset('images/LeftaR-demo1.jpeg'), asset('images/LeftaR-demo2.jpeg')],
+      desc: 'AR-based rehabilitation tool for people with Unilateral Spatial Neglect (USN), especially those who tend to ignore stimuli on the left side. The core exercise is simple: a friendly 3D dog appears in the user’s real environment on the left, and the user must find and tap it.',
+      tech: 'Tech: Swift',
+    },
+    {
       title: 'NNAST (GNN+LLM型脆弱性診断ツール)',
       img: asset('images/NNAST1.png'),
       images: [asset('images/NNAST1.png'), asset('images/NNAST2.png')],
