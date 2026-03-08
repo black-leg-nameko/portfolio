@@ -11,7 +11,7 @@ export default function App() {
     <>
       <Navbar />
       <Hero />
-      <main>
+      <main className="site-main">
         <About />
         <Portfolio />
         <Research />
