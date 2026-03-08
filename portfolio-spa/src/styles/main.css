@@ -20,20 +20,6 @@ html {
     scroll-behavior: smooth;
 }
 
-/* Improve initial rendering performance for sectioned layout */
-.page-section {
-    content-visibility: auto;
-    contain-intrinsic-size: 900px;
-}
-
-/* On coarse pointers (mobile), avoid content-visibility to prevent blanking/flicker */
-@media (pointer: coarse) {
-    .page-section {
-        content-visibility: visible;
-        contain-intrinsic-size: auto;
-    }
-}
-
 /* Respect users who prefer reduced motion and lighten effects */
 @media (prefers-reduced-motion: reduce) {
     html {
@@ -1201,6 +1187,13 @@ nav a {
     transition: all 0.3s ease;
 }
 
+.contact-icon {
+    width: 1.15rem;
+    height: 1.15rem;
+    flex: 0 0 auto;
+    display: block;
+}
+
 
 @keyframes pulseGlow {
     0% { box-shadow: 0 0 5px #00f0ff; }
@@ -1220,5 +1213,4 @@ nav a {
     pointer-events: none;
     transform: translateZ(0);
 }
-
 

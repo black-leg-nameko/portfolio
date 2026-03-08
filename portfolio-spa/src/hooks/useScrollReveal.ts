@@ -1,17 +1,18 @@
-import { useEffect } from 'react';
-import { gsap } from '../lib/gsap';
+import { useLayoutEffect } from 'react';
+import { gsap, ScrollTrigger } from '../lib/gsap';
 
 export function useScrollReveal(
   rootRef: React.RefObject<HTMLElement | null>,
   selector: string = '.reveal, .project-card'
 ) {
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!rootRef.current) return;
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
     if (reduce.matches) return;
     const coarse = window.matchMedia('(pointer: coarse)');
     if (coarse.matches) return;
 
+    let refreshFrame = 0;
     const ctx = gsap.context(() => {
       const elements = gsap.utils.toArray<HTMLElement>(selector, rootRef.current!);
       elements.forEach((el) => {
@@ -33,12 +34,18 @@ export function useScrollReveal(
           }
         );
       });
+
+      // React commits this subtree before paint; refresh once on the next frame
+      // so ScrollTrigger measures the final section layout.
+      refreshFrame = window.requestAnimationFrame(() => {
+        ScrollTrigger.refresh();
+      });
     }, rootRef);
 
     return () => {
+      window.cancelAnimationFrame(refreshFrame);
       ctx.revert();
     };
   }, [rootRef, selector]);
 }
-
 

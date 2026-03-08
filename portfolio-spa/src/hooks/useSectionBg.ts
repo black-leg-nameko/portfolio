@@ -23,11 +23,10 @@ export function useSectionBg(
           start: 'top center',
           end: 'bottom center',
           toggleActions: 'play reverse play reverse',
-        } as any,
+        },
       });
     }, rootRef);
     return () => ctx.revert();
   }, [rootRef, startColor, endColor]);
 }
-
 
