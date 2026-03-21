@@ -32,13 +32,6 @@ export function Research() {
     //   doi: '10.xxxx/xxxxx', // オプション
     // },
     {
-      title: '所有権不変条件によるクロスチェーン NFT の脆弱性分類',
-      authors: ['北島琉斗', '櫻井幸一'],
-      venue: '電子情報通信学会',
-      date: '2026年3月',
-      link: 'https://pub.confit.atlas.jp/ja/event/general2026/presentation/A-12-03',
-    },
-    {
       title: 'クロスチェーンブリッジ遅延の予測に基づく時間的不整合脆弱性の機械学習的評価',
       authors: ['北島琉斗', '櫻井幸一'],
       venue: '第112回CSEC',
