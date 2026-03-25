@@ -197,8 +197,8 @@ img {
   pointer-events: none;
   background-size: cover;
   background-position: center;
-  opacity: 0.22;
-  filter: saturate(0.9) contrast(1.05);
+  opacity: 0.42;
+  filter: saturate(1.05) contrast(1.1);
 }
 
 .hero-bg::after {
@@ -206,9 +206,9 @@ img {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 30% 20%, rgba(0, 0, 0, 0.35), transparent 55%),
-    radial-gradient(circle at 70% 80%, rgba(0, 0, 0, 0.45), transparent 60%),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.68), rgba(0, 0, 0, 0.78));
+    radial-gradient(circle at 30% 20%, rgba(0, 0, 0, 0.22), transparent 55%),
+    radial-gradient(circle at 70% 80%, rgba(0, 0, 0, 0.28), transparent 60%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.55));
 }
 
 .hero-shell {
