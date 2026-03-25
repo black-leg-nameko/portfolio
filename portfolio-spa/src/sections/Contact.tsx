@@ -46,7 +46,7 @@ export function Contact() {
   useScrollReveal(ref);
   useTypewriter(ref, 'h2');
   useParallaxBg(ref, '.parallax-bg', -4, 6);
-  useSectionBg(ref, '#020202', '#060606');
+  useSectionBg(ref, '#0a0a0c', '#0f0f11');
 
   return (
     <section id="contact" className="page-section" ref={ref}>

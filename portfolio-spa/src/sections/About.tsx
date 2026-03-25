@@ -11,7 +11,7 @@ export function About() {
   useScrollReveal(ref);
   useTypewriter(ref, 'h2');
   useParallaxBg(ref, '.parallax-bg', -6, 6);
-  useSectionBg(ref, '#030303', '#070707');
+  useSectionBg(ref, '#0c0c0e', '#111113');
 
   return (
     <section id="about" className="page-section" ref={ref}>
