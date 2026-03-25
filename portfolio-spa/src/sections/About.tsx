@@ -4,56 +4,65 @@ import { useTypewriter } from '../hooks/useTypewriter';
 import { useParallaxBg } from '../hooks/useParallaxBg';
 import { useSectionBg } from '../hooks/useSectionBg';
 
+const focusAreas = ['Cyber Security', 'AI', 'App Development', 'CTF / HTB'];
+
 export function About() {
   const ref = useRef<HTMLElement | null>(null);
   useScrollReveal(ref);
   useTypewriter(ref, 'h2');
-  useParallaxBg(ref, '.parallax-bg', -8, 6);
-  useSectionBg(ref, '#05080f', '#0a0d18');
+  useParallaxBg(ref, '.parallax-bg', -6, 6);
+  useSectionBg(ref, '#0c0c0e', '#111113');
 
   return (
     <section id="about" className="page-section" ref={ref}>
       <div className="parallax-bg" aria-hidden="true" />
-      <h2 className="reveal typewriter">ABOUT ME</h2>
-      <div className="my-field-container reveal">
-        <h3 className="my-field">Cyber Security</h3>
-        <h3 className="my-field">AI</h3>
-        <h3 className="my-field">App Development</h3>
-        <h3 className="my-field">CTF,HTB</h3>
+
+      <div className="section-head">
+        <h2 className="reveal typewriter">ABOUT ME</h2>
+        <p className="section-copy reveal">
+          Software engineer working across cybersecurity, AI, and product engineering with a focus
+          on practical implementation.
+        </p>
       </div>
-      <div className="about-details reveal">
+
+      <div className="simple-panel reveal">
+        <div className="my-field-container">
+          {focusAreas.map((area) => (
+            <span key={area} className="my-field">
+              {area}
+            </span>
+          ))}
+        </div>
+
+        <hr className="section-divider" />
+
         <h3>Experience</h3>
         <ul className="about-list">
+          <li>Currently working as a Software Engineer and building practical production skills.</li>
           <li>
-            Currently working as a Software Engineer, where I am developing practical skills.
+            Internship experience implementing security access functions for in-vehicle software,
+            with encryption-based mechanisms for automotive cybersecurity.
           </li>
           <li>
-            Internship experience in implementing security access functions for in-vehicle software, focusing on encryption-based mechanisms to enhance automotive cybersecurity.
-          </li>
-          <li>
-            Selected for the AKATSUKI project "Fukuoka Mitou" 2025.{" "}
+            Selected for the AKATSUKI project &quot;Fukuoka Mitou&quot; 2025.{' '}
             <a href="https://mitou-fukuoka.org/works/nnast/" target="_blank" rel="noreferrer">
-              Details (URL:mitou-fukuoka.org) ↗ [https://mitou-fukuoka.org/works/nnast/]
+              View project details
             </a>
           </li>
-          <li>
-            In my cybersecurity research, I regularly implement PoCs.
-          </li>
+          <li>Regularly implementing PoCs as part of cybersecurity research and validation work.</li>
         </ul>
 
         <hr className="section-divider" />
 
-        <h3 className="reveal">Skills</h3>
-        <ul className="tech-list reveal">
-          <li>Programming: C/C++. Scala</li>
+        <h3>Skills</h3>
+        <ul className="tech-list">
+          <li>Programming: C/C++, Scala</li>
           <li>Web Development: Laravel, Next.js</li>
           <li>AI/ML: PyTorch</li>
-          <li>AWS: Hands-on experience in production environment</li>
-          <li>AWS & GCP:  Used for research experiments and prototyping</li>
+          <li>AWS: Hands-on experience in a production environment</li>
+          <li>AWS &amp; GCP: Used for research experiments and prototyping</li>
         </ul>
       </div>
     </section>
   );
 }
-
-

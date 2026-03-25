@@ -45,28 +45,45 @@ export function Contact() {
   const ref = useRef<HTMLElement | null>(null);
   useScrollReveal(ref);
   useTypewriter(ref, 'h2');
-  useParallaxBg(ref, '.parallax-bg', -5, 8);
-  useSectionBg(ref, '#070a12', '#0a0f16');
+  useParallaxBg(ref, '.parallax-bg', -4, 6);
+  useSectionBg(ref, '#0a0a0c', '#0f0f11');
+
   return (
     <section id="contact" className="page-section" ref={ref}>
       <div className="parallax-bg" aria-hidden="true" />
-      <h2 className="reveal typewriter">CONTACT</h2>
-      <p>e-mail: blacklegnameko14@gmail.com</p>
-      <div className="contact-links reveal">
-        <a href="https://github.com/black-leg-nameko" target="_blank" className="contact-link" rel="noreferrer">
-          <GitHubIcon className="contact-icon" />
-          GitHub
+
+      <div className="section-head">
+        <h2 className="reveal typewriter">CONTACT</h2>
+        <p className="section-copy reveal">
+          Open to collaborations around security, applied AI, and product engineering.
+        </p>
+      </div>
+
+      <div className="simple-panel reveal">
+        <a className="contact-mail" href="mailto:blacklegnameko14@gmail.com">
+          blacklegnameko14@gmail.com
         </a>
-        <a href="https://www.linkedin.com/in/ryuto-kitajima-b93748378/" target="_blank" className="contact-link" rel="noreferrer">
-          <LinkedInIcon className="contact-icon" />
-          LinkedIn
-        </a>
-        <a href="https://x.com/BlackLeg_nmk" target="_blank" className="contact-link" rel="noreferrer">
-          <XIcon className="contact-icon" />
-          X
-        </a>
+
+        <div className="contact-links">
+          <a href="https://github.com/black-leg-nameko" target="_blank" className="contact-link" rel="noreferrer">
+            <GitHubIcon className="contact-icon" />
+            GitHub
+          </a>
+          <a
+            href="https://www.linkedin.com/in/ryuto-kitajima-b93748378/"
+            target="_blank"
+            className="contact-link"
+            rel="noreferrer"
+          >
+            <LinkedInIcon className="contact-icon" />
+            LinkedIn
+          </a>
+          <a href="https://x.com/BlackLeg_nmk" target="_blank" className="contact-link" rel="noreferrer">
+            <XIcon className="contact-icon" />
+            X
+          </a>
+        </div>
       </div>
     </section>
   );
 }
-
