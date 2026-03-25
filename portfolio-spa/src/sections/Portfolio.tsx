@@ -65,7 +65,7 @@ export function Portfolio() {
   useScrollReveal(ref, '.reveal, .project-card');
   useTypewriter(ref, 'h2');
   useParallaxBg(ref, '.parallax-bg', -5, 8);
-  useSectionBg(ref, '#0a0a0c', '#101013');
+  useSectionBg(ref, '#030303', '#080808');
 
   const [selected, setSelected] = useState<number | null>(null);
 
