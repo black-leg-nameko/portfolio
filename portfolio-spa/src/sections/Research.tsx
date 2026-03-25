@@ -18,7 +18,7 @@ export function Research() {
   useScrollReveal(ref, '.reveal, .publication-item');
   useTypewriter(ref, 'h2');
   useParallaxBg(ref, '.parallax-bg', -5, 8);
-  useSectionBg(ref, '#0c0c0e', '#111113');
+  useSectionBg(ref, '#0a0a0c', '#101013');
 
   const publications: Publication[] = [
     {

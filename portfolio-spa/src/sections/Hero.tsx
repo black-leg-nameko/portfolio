@@ -6,7 +6,7 @@ export function Hero() {
         <h1 className="hero-title">Security, AI, and product engineering.</h1>
         <p className="hero-lead">
           Building practical systems across cybersecurity research, applied AI, and interactive
-          software.
+          software with a calm black-based visual style.
         </p>
 
         <div className="hero-actions">
