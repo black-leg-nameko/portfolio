@@ -43,10 +43,6 @@ export function Research() {
 
       <div className="section-head">
         <h2 className="reveal typewriter">RESEARCH &amp; PUBLICATIONS</h2>
-        <p className="section-copy reveal">
-          Current interests include blockchain security, LLM security, and machine-learning-based
-          evaluation of attack surfaces.
-        </p>
       </div>
 
       <div className="simple-panel reveal">

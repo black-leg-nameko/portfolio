@@ -54,9 +54,6 @@ export function Contact() {
 
       <div className="section-head">
         <h2 className="reveal typewriter">CONTACT</h2>
-        <p className="section-copy reveal">
-          Open to collaborations around security, applied AI, and product engineering.
-        </p>
       </div>
 
       <div className="simple-panel reveal">

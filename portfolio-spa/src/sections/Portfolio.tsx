@@ -84,9 +84,6 @@ export function Portfolio() {
 
       <div className="section-head">
         <h2 className="reveal typewriter">PORTFOLIO</h2>
-        <p className="section-copy reveal">
-          Selected work across security research, AI tooling, and product experiments.
-        </p>
       </div>
 
       <div className="portfolio-grid">
