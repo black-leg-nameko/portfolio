@@ -19,10 +19,6 @@ export function About() {
 
       <div className="section-head">
         <h2 className="reveal typewriter">ABOUT ME</h2>
-        <p className="section-copy reveal">
-          Software engineer working across cybersecurity, AI, and product engineering with a focus
-          on practical implementation.
-        </p>
       </div>
 
       <div className="simple-panel reveal">
