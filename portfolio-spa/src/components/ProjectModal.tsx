@@ -114,7 +114,10 @@ export function ProjectModal({
             )}
           </div>
           <div className="modal-body">
-            <h3 className="modal-title" dangerouslySetInnerHTML={{ __html: project.title }} />
+            <h3
+              className="modal-title"
+              dangerouslySetInnerHTML={{ __html: project.title.replace(/\n/g, '<br/>') }}
+            />
             <p className="modal-desc">{project.desc}</p>
             <p className="modal-tech">{project.tech}</p>
           </div>
