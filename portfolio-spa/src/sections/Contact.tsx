@@ -75,7 +75,7 @@ export function Contact() {
             <LinkedInIcon className="contact-icon" />
             LinkedIn
           </a>
-          <a href="https://x.com/BlackLeg_nmk" target="_blank" className="contact-link" rel="noreferrer">
+          <a href="https://x.com/kitanmk" target="_blank" className="contact-link" rel="noreferrer">
             <XIcon className="contact-icon" />
             X
           </a>
