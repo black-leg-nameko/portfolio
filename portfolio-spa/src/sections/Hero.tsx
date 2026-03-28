@@ -9,8 +9,7 @@ export function Hero() {
         style={{ backgroundImage: `url("${asset('videos/torus-v2.gif')}")` }}
       />
       <div className="hero-shell">
-        <p className="hero-eyebrow">black-leg</p>
-        <h1 className="hero-title">Security, AI, and product engineering.</h1>
+        <h1 className="hero-title">Black-Leg</h1>
 
         <div className="hero-actions">
           <a href="#portfolio" className="hero-button hero-button-primary">
