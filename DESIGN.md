@@ -287,7 +287,7 @@ The dialog's Close / Play demo / Stop buttons. `{typography.control}`, 36 px min
 A control placed over an image carries its own white fill and border, and the image behind it is **not** dimmed. A translucent plate over a poster frame reads as a disabled image, and it is a surface the elevation table does not have.
 
 ### States (mandatory)
-- **Empty** — a sentence, not a panel: "Nothing published yet — the work in progress is on GitHub." Every list surface must have one, and it must not be a bordered box.
+- **Empty** — a sentence, not a panel: "Nothing published yet — the work in progress is on GitHub." Every list surface must have one, and it must not be a bordered box. The one exception is a section whose heading is a claim in itself: Awards & Grants renders nothing at all when the list is empty, because a heading over "nothing yet" states an absence the page was not asked to state. A section may take this exception only by omitting its heading with it. The same holds one level down: a group with no entries is not an empty group, it is absent — the label goes with it, and a list left with a single group carries no label at all, because a label names a split.
 - **Loading** — a `{colors.canvas-soft-2}` skeleton at the final element's dimensions with an opacity pulse. Never a spinner.
 - **Error** — an inline `{colors.error}` message on `{colors.error-soft}` with a retry control, never a bare stack trace.
 

@@ -1,6 +1,8 @@
 import Link from "next/link";
+import { AwardList } from "@/components/AwardList";
 import { PublicationList } from "@/components/PublicationList";
 import { Torus } from "@/components/Torus";
+import { awards } from "@/data/awards";
 import { profile } from "@/data/profile";
 import { projects } from "@/data/projects";
 import { publications } from "@/data/publications";
@@ -14,6 +16,7 @@ const elsewhere = [
 /** Reviewed work and unreviewed work are listed apart, and labelled as such. */
 const peerReviewed = publications.filter((publication) => publication.peerReviewed);
 const notPeerReviewed = publications.filter((publication) => !publication.peerReviewed);
+
 
 export default function HomePage() {
   return (
@@ -65,6 +68,19 @@ export default function HomePage() {
           </p>
         )}
       </section>
+
+      {/* ── Awards & Grants ──────────────────────────────────────────────── */}
+      {/* One timeline, not one list per kind: a funded selection and a prize are not the
+          same claim, but the claim is stated on the entry itself (採択 / 受賞), which
+          keeps the record in one chronological run. */}
+      {awards.length > 0 && (
+        <section id="awards" className="mt-16">
+          <h2 className="heading">Awards &amp; Grants</h2>
+          <div className="mt-6">
+            <AwardList awards={awards} />
+          </div>
+        </section>
+      )}
 
       {/* ── Projects ─────────────────────────────────────────────────────── */}
       <section id="projects" className="mt-16">
