@@ -1,0 +1,5 @@
+# Local QA artifacts. Browser screenshots taken during design review land at the
+# repository root; none of them are part of the site, whose images live in
+# portfolio-spa/public.
+/.playwright-mcp/
+/*.png

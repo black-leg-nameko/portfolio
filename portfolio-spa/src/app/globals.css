@@ -1,0 +1,230 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Design tokens — see DESIGN.md at the repository root.
+   Nothing in this project hardcodes a colour; everything references a token.
+   --------------------------------------------------------------------------- */
+@theme {
+  --color-ink: #111318;
+  --color-body: #3f4147;
+  /* 5.1:1 on canvas — 12px mono metadata must clear WCAG AA */
+  --color-mute: #6e6e6e;
+  --color-hairline: #e6e6e6;
+  /* 3.45:1 on canvas — the underline under every link, and the only "border" left */
+  --color-hairline-strong: #8a8a8a;
+  --color-canvas: #ffffff;
+  --color-canvas-soft: #fafafa;
+  --color-canvas-soft-2: #f4f4f4;
+  /* The only colour on the site, and it is spent entirely on the focus ring. */
+  --color-focus: #4b2ae0;
+  --color-on-ink: #ffffff;
+  --color-error: #c50000;
+  --color-error-soft: #f7d4d6;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* DESIGN.md has one breakpoint, because there is one layout to change. The rest of
+     Tailwind's defaults are unset so a stray `md:` cannot reintroduce one. */
+  --breakpoint-sm: 700px;
+  --breakpoint-md: initial;
+  --breakpoint-lg: initial;
+  --breakpoint-xl: initial;
+  --breakpoint-2xl: initial;
+
+  --color-selection-fg: #f2f2f2;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-body);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 27px;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-ink);
+    color: var(--color-selection-fg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+    /* the one place a radius exists — see DESIGN.md, "focus ring geometry only" */
+    border-radius: 4px;
+  }
+
+  /* One link treatment for the whole site. No buttons, no pills — a link is underlined
+     text, and the underline is the quiet grey until you point at it. */
+  a {
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--color-hairline-strong);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: text-decoration-color 150ms ease;
+  }
+
+  a:hover {
+    text-decoration-color: var(--color-ink);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* The measure. Every page is this one column — nothing is ever wider. */
+  .column {
+    width: 100%;
+    max-width: 680px;
+    margin-inline: auto;
+    padding-inline: 24px;
+  }
+
+  /* The name, and the only type above 20px on the site. */
+  .name {
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 36px;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+  }
+
+  /* Section headings — text, not ornament: same family and colour as the prose,
+     one step up in size and weight. */
+  .heading {
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 26px;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+  }
+
+  /* An entry title inside a list (publication, project, role). */
+  .entry-title {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 26px;
+    color: var(--color-ink);
+  }
+
+  /* Mono is metadata and nothing else: venues, dates, stacks, the footer. */
+  .meta {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 0.02em;
+    color: var(--color-mute);
+  }
+
+  .meta a {
+    color: var(--color-mute);
+  }
+
+  .meta a:hover {
+    color: var(--color-ink);
+  }
+
+  /* JetBrains Mono has no CJK, so a Japanese venue or author line silently falls back
+     mid-sentence. Japanese metadata is set in the sans face on purpose instead.
+     Both selectors are needed: the language can sit on the meta element itself
+     (an all-Japanese author line) or on a span inside it (a venue in a mixed line). */
+  .meta[lang="ja"],
+  .meta [lang="ja"] {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    letter-spacing: 0;
+  }
+
+  /* A link that is alone on a meta line is not "inline in a sentence", so it gets a real
+     target. The caller cancels the added height with `-mb-3`. */
+  .meta-link {
+    display: inline-block;
+    min-width: 44px;
+    min-height: 44px;
+    line-height: 44px;
+  }
+
+  /* The only button on the site. The dialog needs controls that read as pressable,
+     so they get a hairline box — square, never a pill. */
+  .control {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 36px;
+    padding-inline: 14px;
+    border: 1px solid var(--color-hairline-strong);
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-size: 13px;
+    line-height: 20px;
+    transition: border-color 150ms ease;
+  }
+
+  .control:hover {
+    border-color: var(--color-ink);
+  }
+
+  /* Separator for inline link runs and metadata: "github · x · email". `nowrap` keeps a
+     dot glued to the label after it, so a wrap never strands one at the end of a line. */
+  .dotted > * {
+    white-space: nowrap;
+  }
+
+  .dotted > * + *::before {
+    content: "·";
+    margin-inline: 10px;
+    color: var(--color-hairline-strong);
+  }
+
+  /* A link run is not prose, so the WCAG 2.5.8 inline exception does not cover it:
+     a one-letter label like "X" has to be a real target. The padding is invisible, so
+     it is set to the 44px floor rather than the 24px minimum. Callers pull the extra
+     12px back with `-mb-3` so the page rhythm is unchanged. */
+  .dotted a {
+    position: relative;
+    display: inline-block;
+    padding-block: 12px;
+  }
+
+  /* The width comes from an overlay rather than a min-width on the anchor itself: a
+     44px-wide box around a one-letter label like "X" would centre it and leave the
+     separators either side of it visibly further out than the rest of the run. */
+  .dotted a::after {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    left: 50%;
+    translate: -50% 0;
+    width: 100%;
+    min-width: 44px;
+  }
+}
+
+@layer utilities {
+  .skeleton-pulse {
+    animation: skeleton-pulse 1.6s ease-in-out infinite;
+  }
+
+  @keyframes skeleton-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.55;
+    }
+  }
+}
