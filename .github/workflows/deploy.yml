@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]   # デフォルトブランチに合わせて変更
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -20,20 +20,23 @@ jobs:
     defaults:
       run:
         working-directory: portfolio-spa
+    env:
+      # Pages serves this site from https://<user>.github.io/portfolio
+      NEXT_PUBLIC_BASE_PATH: /portfolio
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
-          cache: 'npm'
+          node-version: "22"
+          cache: "npm"
           cache-dependency-path: portfolio-spa/package-lock.json
       - run: npm ci
-      - run: npm run build
-      # 直リンクに対応したい場合のみ有効化（HashRouterでない時）
-      # - run: cp dist/index.html dist/404.html
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npx next build
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: portfolio-spa/dist
+          path: portfolio-spa/out
 
   deploy:
     needs: build
