@@ -55,8 +55,20 @@ export default function HomePage() {
 
         {publications.length > 0 ? (
           <div className="mt-6 space-y-10">
-            <PublicationList label="Peer-reviewed" publications={peerReviewed} />
-            <PublicationList label="Not peer-reviewed" publications={notPeerReviewed} />
+            {/* The labels name the venue as well as the review status. That is true of
+                every entry today, but it is a claim `peerReviewed` alone does not carry:
+                a peer-reviewed domestic paper, or an unreviewed international one, needs
+                the label changed rather than the entry filed under it. */}
+            <PublicationList
+              label="査読付き国際会議"
+              labelEn="Peer-reviewed"
+              publications={peerReviewed}
+            />
+            <PublicationList
+              label="国内学会発表(査読無し)"
+              labelEn="Not peer-reviewed"
+              publications={notPeerReviewed}
+            />
           </div>
         ) : (
           <p className="mt-6">

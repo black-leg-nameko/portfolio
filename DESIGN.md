@@ -271,7 +271,7 @@ A link that opens a dialog rather than a page is a `<button>` carrying the same 
 
 Three rules the implementation has to honour:
 - **The separator is not part of the link.** The `·` is generated on a wrapper around the anchor, never on the anchor: inside it, it gets the link's underline and lands in the link's accessible name ("·GitHub"). The wrapper is `white-space: nowrap`, so a wrap never strands a dot at the end of a line, and a run that would wrap is split into two blocks instead (the footer does this below 700 px).
-- **Japanese metadata is set in the sans face** at 13 px, because JetBrains Mono has no CJK and would otherwise fall back mid-line. Venues, author lines, and the dialog's Japanese subtitle take this path.
+- **Japanese metadata is set in the sans face** at 13 px, because JetBrains Mono has no CJK and would otherwise fall back mid-line. Venues, author lines, group labels, an award's programme name and selected domain, and the dialog's Japanese subtitle take this path.
 
 ### Entry
 The one repeating structure, used by publications, projects, and roles: title in `{typography.entry-title}`, one line of prose in `{typography.body}`, one meta line. Entries are separated by `{spacing.lg}` of space; only the `/products` list adds hairlines, because it is long enough to need scanning.
