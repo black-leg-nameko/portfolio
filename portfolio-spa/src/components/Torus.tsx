@@ -33,21 +33,11 @@ export function Torus({ className = "" }: { className?: string }) {
     const node = ref.current;
     if (!node) return;
 
-    let cancelled = false;
-
     const observer = new IntersectionObserver(
       (entries) => {
         if (!entries.some((entry) => entry.isIntersecting)) return;
         observer.disconnect();
-
-        const image = new Image();
-        image.onload = () => {
-          if (!cancelled) setSrc(animationSrc);
-        };
-        image.onerror = () => {
-          /* keep the poster frame — a failed animation must not blank the glyph */
-        };
-        image.src = animationSrc;
+        setSrc(animationSrc);
       },
       { rootMargin: "200px" },
     );
@@ -55,7 +45,6 @@ export function Torus({ className = "" }: { className?: string }) {
     observer.observe(node);
 
     return () => {
-      cancelled = true;
       observer.disconnect();
     };
   }, []);
@@ -69,6 +58,9 @@ export function Torus({ className = "" }: { className?: string }) {
       aria-hidden="true"
       width={244}
       height={353}
+      onError={() => {
+        if (src !== POSTER) setSrc(POSTER);
+      }}
       draggable={false}
       className={`pointer-events-none select-none opacity-70 ${className}`}
     />
