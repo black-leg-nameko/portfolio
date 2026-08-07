@@ -41,15 +41,13 @@ export function Torus({ className = "" }: { className?: string }) {
         observer.disconnect();
 
         const image = new Image();
+        image.onload = () => {
+          if (!cancelled) setSrc(animationSrc);
+        };
+        image.onerror = () => {
+          /* keep the poster frame — a failed animation must not blank the glyph */
+        };
         image.src = animationSrc;
-        image
-          .decode()
-          .then(() => {
-            if (!cancelled) setSrc(animationSrc);
-          })
-          .catch(() => {
-            /* keep the poster frame — a failed animation must not blank the glyph */
-          });
       },
       { rootMargin: "200px" },
     );
