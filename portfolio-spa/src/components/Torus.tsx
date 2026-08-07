@@ -5,6 +5,7 @@ import { asset } from "@/lib/asset";
 
 const POSTER = asset("/assets/torus-poster.png");
 const ANIMATION = asset("/assets/torus.webp");
+const MOBILE_ANIMATION = asset("/assets/torus-mobile.webp");
 
 type Connection = { saveData?: boolean };
 
@@ -13,11 +14,9 @@ type Connection = { saveData?: boolean };
  * so it reads as printed glyph density on white paper. It sits beside the name, small —
  * where a researcher's page would put a portrait.
  *
- * The poster frame renders first and is kept — never swapped for the 1.7 MB animation —
- * for reduced-motion visitors, phone-sized viewports, and anyone on Save-Data. Everyone
- * else gets the animation once the glyph is actually on screen. At the top of the page
- * that is immediately; the observer stays because it is what keeps the rule true if the
- * glyph is ever moved further down.
+ * The poster frame renders first and is kept for reduced-motion visitors and anyone on
+ * Save-Data. Once visible, phones load a lower-resolution, lower-frame-rate version;
+ * larger screens load the full animation.
  */
 export function Torus({ className = "" }: { className?: string }) {
   const [src, setSrc] = useState(POSTER);
@@ -27,7 +26,9 @@ export function Torus({ className = "" }: { className?: string }) {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const smallScreen = window.matchMedia("(max-width: 699px)").matches;
     const saveData = Boolean((navigator as Navigator & { connection?: Connection }).connection?.saveData);
-    if (reduceMotion || smallScreen || saveData) return;
+    if (reduceMotion || saveData) return;
+
+    const animationSrc = smallScreen ? MOBILE_ANIMATION : ANIMATION;
 
     const node = ref.current;
     if (!node) return;
@@ -40,11 +41,11 @@ export function Torus({ className = "" }: { className?: string }) {
         observer.disconnect();
 
         const image = new Image();
-        image.src = ANIMATION;
+        image.src = animationSrc;
         image
           .decode()
           .then(() => {
-            if (!cancelled) setSrc(ANIMATION);
+            if (!cancelled) setSrc(animationSrc);
           })
           .catch(() => {
             /* keep the poster frame — a failed animation must not blank the glyph */
