@@ -11,7 +11,7 @@ git log --all --oneline -- 'portfolio-spa/public/assets/videos/torus-v2.gif'
 git show <commit>:portfolio-spa/public/assets/videos/torus-v2.gif > /tmp/torus-v2.gif
 ```
 
-Both scripts need Pillow (`pip install pillow numpy`).
+All three scripts need Pillow (`pip install pillow numpy`).
 
 ## `torus_to_transparent_webp.py`
 
@@ -21,6 +21,16 @@ as a lossless animated WebP plus a poster frame.
 
 ```bash
 python3 tools/torus_to_transparent_webp.py /tmp/torus-v2.gif portfolio-spa/public/assets
+```
+
+## `build_mobile_torus.py`
+
+Derives the half-resolution torus served to phones from the full `torus.webp`. It keeps every frame — the
+phone animation runs at the same 14.3 fps — and re-quantises alpha to 8 steps after the downscale, which is
+what keeps the lossless encode small. Run it after `torus_to_transparent_webp.py`.
+
+```bash
+python3 tools/build_mobile_torus.py portfolio-spa/public/assets/torus.webp portfolio-spa/public/assets/torus-mobile.webp
 ```
 
 ## `optimize_media.py`

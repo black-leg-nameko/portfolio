@@ -175,7 +175,7 @@ A transparent animated WebP whose glyphs are `{colors.glyph}` at varying alpha. 
 - It appears **once, beside the name at the top of the home page, at 140 px wide**, at 70 % opacity — where a researcher's page would put a portrait. It is not a hero: it takes the right edge of the column at the size of a photograph, and the name stays the largest thing on the page. Below 700 px the column is too narrow to hold both, so it sits above the name instead of shrinking.
 - It does not go smaller than 140 px: the source is 244 px of monospace glyphs, and below that they stop resolving as characters and turn into a grey smudge.
 - It is `aria-hidden`, never tinted, never inverted onto a dark plate, never cropped, never placed behind text.
-- It animates in every environment, with no reduced-motion, `Save-Data`, or in-viewport gate: the animation is what loads. Viewports under 700 px take the lower-resolution, lower-frame-rate cut, larger viewports the full one, chosen by `<picture>` so only one file is fetched. The poster frame is kept only as the fallback if the WebP fails to load.
+- It animates in every environment, with no reduced-motion, `Save-Data`, or in-viewport gate: the animation is what loads. Viewports under 700 px take a half-resolution cut, larger viewports the full one, chosen by `<picture>` so only one file is fetched. Both run at the same 14.3 fps: the phone never gets a slideshow of the loop, only a smaller one. The poster frame is kept only as the fallback if the WebP fails to load.
 
 ## Typography
 
@@ -346,6 +346,7 @@ Changed in this revision:
 - Breakpoints reduced from three (700 / 900 / 1100) to one (700), because there is only one layout to change. Tailwind's `md` / `lg` / `xl` / `2xl` are unset so a stray utility cannot reintroduce a fourth.
 - `accent` renamed to `focus`, since that is now its entire job.
 - The torus animates unconditionally: the reduced-motion, `Save-Data`, and IntersectionObserver gates are gone, and `<picture>` picks the mobile or full animation up front.
+- The mobile torus runs the full 14.3 fps rather than ~5, and got smaller doing it: the frames were being dropped to pay for an encode that had lost the alpha quantisation the material depends on.
 - The skip link was removed with the nav bar: with no repeated block before `<main>`, there is nothing to bypass.
 
 Changed after the design review of this revision:
