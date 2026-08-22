@@ -13,9 +13,9 @@ const MOBILE_ANIMATION = asset("/assets/torus-mobile.webp");
  * where a researcher's page would put a portrait.
  *
  * It animates everywhere, unconditionally: no reduced-motion, Save-Data, or
- * in-viewport gate. Phones get a half-resolution, lower-frame-rate cut of the same
- * loop — picked by the browser from <picture>, so the animation is the first and only
- * frame anyone downloads. The poster is kept solely as the fallback if the WebP fails.
+ * in-viewport gate. Phones get a half-resolution cut of the same loop at the same
+ * frame rate — picked by the browser from <picture>, so the animation is the first and
+ * only frame anyone downloads. The poster is kept solely as the fallback if the WebP fails.
  */
 export function Torus({ className = "" }: { className?: string }) {
   const [failed, setFailed] = useState(false);
