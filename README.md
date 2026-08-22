@@ -44,4 +44,4 @@ npm run build      # static export into out/ (and mirrored to dist/)
 
 ## Media pipeline
 
-The torus is derived from the original `torus-v2.gif`: the near-black backdrop is keyed out to alpha and the glyphs are re-inked, then encoded as a transparent animated WebP. It renders as its poster frame and only fetches the animation once visible. Phones receive a 122 × 177 px, ~5 fps version (about 720 KB); `Save-Data` and `prefers-reduced-motion` keep the poster. Project demos are stills by default; the animated WebP is only fetched when a visitor presses **Play demo**.
+The torus is derived from the original `torus-v2.gif`: the near-black backdrop is keyed out to alpha and the glyphs are re-inked, then encoded as a transparent animated WebP. The animation loads immediately in every environment — no reduced-motion, `Save-Data`, or in-viewport gate. `<picture>` hands phones a 122 × 177 px, ~5 fps version (about 720 KB) and larger viewports the full 244 × 353 px one, so only one file is fetched; the poster frame remains only as the fallback if the WebP fails. Project demos are stills by default; the animated WebP is only fetched when a visitor presses **Play demo**.

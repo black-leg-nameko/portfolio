@@ -175,7 +175,7 @@ A transparent animated WebP whose glyphs are `{colors.glyph}` at varying alpha. 
 - It appears **once, beside the name at the top of the home page, at 140 px wide**, at 70 % opacity — where a researcher's page would put a portrait. It is not a hero: it takes the right edge of the column at the size of a photograph, and the name stays the largest thing on the page. Below 700 px the column is too narrow to hold both, so it sits above the name instead of shrinking.
 - It does not go smaller than 140 px: the source is 244 px of monospace glyphs, and below that they stop resolving as characters and turn into a grey smudge.
 - It is `aria-hidden`, never tinted, never inverted onto a dark plate, never cropped, never placed behind text.
-- The static poster frame renders first and stays for reduced-motion visitors and `Save-Data`. Once visible, viewports under 700 px fetch the lower-resolution, lower-frame-rate mobile animation; larger viewports fetch the full animation.
+- It animates in every environment, with no reduced-motion, `Save-Data`, or in-viewport gate: the animation is what loads. Viewports under 700 px take the lower-resolution, lower-frame-rate cut, larger viewports the full one, chosen by `<picture>` so only one file is fetched. The poster frame is kept only as the fallback if the WebP fails to load.
 
 ## Typography
 
@@ -304,7 +304,7 @@ Effectively none. The site ships three moving things:
 
 There are **no scroll reveals and no route transitions**. Content renders visible in the HTML at full opacity — an element hidden by render-blocking CSS and un-hidden by a hydration-time observer is a blank first paint, not an animation.
 
-`prefers-reduced-motion: reduce` collapses every remaining transition and holds the torus at its poster frame. The CSS media query cannot reach a JS-driven animation, so the dialog's fade reads the preference itself and drops its duration to zero — a motion library's defaults are not a reduced-motion implementation.
+`prefers-reduced-motion: reduce` collapses every remaining transition. The CSS media query cannot reach a JS-driven animation, so the dialog's fade reads the preference itself and drops its duration to zero — a motion library's defaults are not a reduced-motion implementation. The torus is the deliberate exception: it loops in every environment, by explicit decision, and is `aria-hidden` decoration at 70 % opacity rather than content.
 
 ## Do's and Don'ts
 
@@ -340,12 +340,12 @@ Carried forward from earlier reviews of the previous system (still binding):
 - `hairline-strong` at `#8a8a8a` so it clears WCAG 1.4.11 as a control boundary — it is now also the link underline.
 - Project figures use `contain`, not `cover`.
 - The dialog focus contract, written above, is not optional.
-- The torus stays a poster frame under reduced-motion and `Save-Data`; under 700 px it uses a lightweight animation.
+- Under 700 px the torus uses the lightweight animation.
 
 Changed in this revision:
 - Breakpoints reduced from three (700 / 900 / 1100) to one (700), because there is only one layout to change. Tailwind's `md` / `lg` / `xl` / `2xl` are unset so a stray utility cannot reintroduce a fourth.
 - `accent` renamed to `focus`, since that is now its entire job.
-- The torus's animation fetch moved behind an IntersectionObserver now that it lives at the foot of the page.
+- The torus animates unconditionally: the reduced-motion, `Save-Data`, and IntersectionObserver gates are gone, and `<picture>` picks the mobile or full animation up front.
 - The skip link was removed with the nav bar: with no repeated block before `<main>`, there is nothing to bypass.
 
 Changed after the design review of this revision:
