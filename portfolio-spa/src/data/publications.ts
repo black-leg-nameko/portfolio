@@ -24,6 +24,21 @@ export type Publication = {
 /** Reverse chronological; accepted-but-unscheduled work sits at the top. */
 export const publications: Publication[] = [
   {
+    title:
+      "Source-Validated Selective LLM Invocation for Direct Prompt-Injection Attempt Detection under False-Bypass Constraints",
+    authors: [
+      "Ryuto Kitajima",
+      "Souya Yoshizuka",
+      "Kohei Miyamoto",
+      "Takeshi Takahashi",
+      "Kouichi Sakurai",
+    ],
+    affiliation: "Kyushu University / NICT",
+    venue: "IWSEC 2026 — International Workshop on Security",
+    peerReviewed: true,
+    status: "Accepted",
+  },
+  {
     title: "TIE: A Temporal Inconsistency Exploitation Threat Class for Cross-Chain Bridges",
     authors: ["Ryuto Kitajima", "Kouichi Sakurai"],
     affiliation: "Kyushu University",
