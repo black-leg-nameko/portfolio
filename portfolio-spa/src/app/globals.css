@@ -177,6 +177,41 @@
     border-color: var(--color-ink);
   }
 
+  /* The three profile links. Same vocabulary as `.control` — square, white, one hairline
+     — but sized to the 44px touch floor and holding a mark instead of a word. It is the
+     only place on the site where a link is not underlined text, because a glyph has no
+     baseline to underline. */
+  .icon-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--color-hairline-strong);
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    text-decoration: none;
+    transition: border-color 150ms ease;
+  }
+
+  .icon-button:hover {
+    border-color: var(--color-ink);
+  }
+
+  /* Visually hidden, still in the accessibility tree: the icon carries no text, so the
+     label is what names the link. */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
   /* Separator for inline link runs and metadata: "github · x · email". `nowrap` keeps a
      dot glued to the label after it, so a wrap never strands one at the end of a line. */
   .dotted > * {
