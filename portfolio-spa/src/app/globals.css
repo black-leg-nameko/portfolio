@@ -182,6 +182,9 @@
      only place on the site where a link is not underlined text, because a glyph has no
      baseline to underline. */
   .icon-button {
+    /* The sr-only label inside is absolutely positioned; without a positioned ancestor it
+       only stays put by accident. */
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -196,6 +199,13 @@
 
   .icon-button:hover {
     border-color: var(--color-ink);
+  }
+
+  /* The site-wide focus ring carries a 4px radius, which is right for a run of text but
+     bulges past the corners of a 44px square at a 2px offset. The box is square, so the
+     ring around it is too. */
+  .icon-button:focus-visible {
+    border-radius: 0;
   }
 
   /* Visually hidden, still in the accessibility tree: the icon carries no text, so the

@@ -294,12 +294,15 @@ The dialog's Close / Play demo / Stop buttons. `{typography.control}`, 36 px min
 A control placed over an image carries its own white fill and border, and the image behind it is **not** dimmed. A translucent plate over a poster frame reads as a disabled image, and it is a surface the elevation table does not have.
 
 ### Icon button
-The three profile links — GitHub, X, LinkedIn — in the header block and the footer. A 44 × 44 px square, white fill, 1 px `{colors.hairline-strong}`, holding an 18 px monochrome mark in `{colors.ink}`; hover darkens the border to ink, exactly like the dialog control. They sit in a `<ul>` with an 8 px gap.
+The three profile links — GitHub, X, LinkedIn — in the header block and the footer. A 44 × 44 px square, white fill, 1 px `{colors.hairline-strong}`, holding a monochrome mark in `{colors.ink}` at roughly 18 px; hover darkens the border to ink, exactly like the dialog control. They sit in a `<ul>` with an 8 px gap. The focus ring drops its 4 px radius here — the box is square, so the ring around it is too.
 
-This is the one link on the site that is not underlined text, because a glyph has no baseline to underline. Three conditions keep it from being the thin end of an icon set:
-- **The marks are the official ones**, inlined as SVG paths (simple-icons, CC0) rather than pulled from a package or an icon font. A brand mark is recognised faster than its name; a generic pictogram is not, and does not qualify.
-- **The glyph is `aria-hidden`.** The accessible name is a visually hidden label, so the link still reads as "GitHub", not as an image.
+This is the one link on the site that is not underlined text, because a glyph has no baseline to underline. Four conditions keep it from being the thin end of an icon set:
+- **The marks are the official ones**, inlined as SVG paths rather than pulled from a package or an icon font. A brand mark is recognised faster than its name; a generic pictogram is not, and does not qualify.
+- **A mark is a letterform or an outline, never a plate.** Brand marks are usually distributed boxed — the vendor's rounded tile with the glyph knocked out of it — and rendered in ink that tile becomes a filled, round-cornered surface, which is the one thing the whole system is built to not have. LinkedIn ships this way and is drawn here as the bare "in" instead. A mark that cannot be separated from its plate does not go in a box.
+- **The glyph is `aria-hidden`.** The accessible name is a visually hidden label, and it names the new tab too, since the visible label that used to carry the link is gone.
 - **It is used for these three links and nothing else.** A section heading, a list bullet, or a call to action does not get an icon.
+
+**Optical sizing.** The three marks are drawn on different grids and none of them fills its own box, so one shared size renders them at three different weights. The sizes are set per mark and checked by measurement, not by eye: ink coverage inside the 44 px box is held within half a point of 8 % across the three. A row where one mark is visibly heavier than its neighbours reads as clip art, and in a system with no colour and no fill, that is the only thing there is to get wrong.
 
 ### States (mandatory)
 - **Empty** — a sentence, not a panel: "Nothing published yet — the work in progress is on GitHub." Every list surface must have one, and it must not be a bordered box. The one exception is a section whose heading is a claim in itself: Awards & Grants renders nothing at all when the list is empty, because a heading over "nothing yet" states an absence the page was not asked to state. A section may take this exception only by omitting its heading with it. The same holds one level down: a group with no entries is not an empty group, it is absent — the label goes with it, and a list left with a single group carries no label at all, because a label names a split.
@@ -366,6 +369,12 @@ Changed in this revision:
 
 Changed after this revision shipped:
 - The "GitHub · X · LinkedIn" dotted run, in both the header block and the footer, became three 44 px square icon buttons. It is a deliberate departure from "no buttons, no icon set": these three are brands whose marks are read faster than their names, and the box reuses the dialog control's vocabulary rather than introducing a new one. The rule it replaces is narrowed, not dropped — the scope is fixed at these three links.
+
+Changed after the design review of the icon buttons:
+- LinkedIn was drawn from the boxed distribution mark, so it rendered as a filled, round-cornered black tile at 15.5 % ink against 8.9 % and 6.9 % for the other two — a filled surface and a rounded corner, both of which the system forbids, sitting in the header's first screen. Replaced with the plain "in" letterform, and the per-mark optical sizing above was added with it: the three now measure 7.3 / 6.8 / 7.2 %.
+- The focus ring's 4 px radius was bulging past the corners of the square box at a 2 px offset; it is square here.
+- The hidden label now says the link opens in a new tab, which the visible label used to imply.
+- `.icon-button` got `position: relative`, so its absolutely positioned label cannot escape it later.
 
 Changed after the design review of this revision:
 - Touch-target rule raised from the 24 px minimum to the 44 px floor for standalone link runs.
