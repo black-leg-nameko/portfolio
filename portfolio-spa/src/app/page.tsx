@@ -1,17 +1,12 @@
 import Link from "next/link";
 import { AwardList } from "@/components/AwardList";
 import { PublicationList } from "@/components/PublicationList";
+import { SocialLinks } from "@/components/SocialLinks";
 import { Torus } from "@/components/Torus";
 import { awards } from "@/data/awards";
 import { profile } from "@/data/profile";
 import { projects } from "@/data/projects";
 import { publications } from "@/data/publications";
-
-const elsewhere = [
-  { label: "GitHub", href: profile.links.github },
-  { label: "X", href: profile.links.x },
-  { label: "LinkedIn", href: profile.links.linkedin },
-];
 
 /** Reviewed work and unreviewed work are listed apart, and labelled as such. */
 const peerReviewed = publications.filter((publication) => publication.peerReviewed);
@@ -32,17 +27,9 @@ export default function HomePage() {
           <p className="mt-6">
             <a href={`mailto:${profile.email}`}>{profile.email}</a>
           </p>
-          {/* The separator is a span around the link, never inside it: a "·" inside the
-              anchor gets underlined and read out as part of the link's name. */}
-          <p className="dotted -mb-3">
-            {elsewhere.map((link) => (
-              <span key={link.label}>
-                <a href={link.href} target="_blank" rel="noreferrer">
-                  {link.label}
-                </a>
-              </span>
-            ))}
-          </p>
+          {/* The three profiles are the one place the page uses marks instead of words —
+              GitHub, X and LinkedIn are recognised faster as glyphs than as labels. */}
+          <SocialLinks className="mt-6" />
         </div>
 
         {/* The one piece of decoration on the site. */}

@@ -124,6 +124,14 @@ components:
     rounded: "{rounded.none}"
     padding: "0px 14px"
     minHeight: 36px
+  icon-button:
+    backgroundColor: "{colors.canvas}"
+    iconColor: "{colors.ink}"
+    borderColor: "{colors.hairline-strong}"
+    rounded: "{rounded.none}"
+    size: 44px
+    iconSize: 18px
+    gap: "{spacing.xs}"
   dialog:
     backgroundColor: "{colors.canvas}"
     borderColor: "{colors.hairline}"
@@ -133,10 +141,8 @@ components:
     scrimColor: "{colors.ink}"
     scrimOpacity: 0.2
   footer-line:
-    textColor: "{colors.mute}"
-    typography: "{typography.meta}"
     padding: "0px 0px {spacing.4xl}"
-    layout: "one dotted link run, left-aligned"
+    layout: "one row of icon buttons, left-aligned"
   skeleton:
     backgroundColor: "{colors.canvas-soft-2}"
     rounded: "{rounded.none}"
@@ -151,7 +157,7 @@ The whole site is one column of `{colors.body}` text on `{colors.canvas}` white,
 
 **Key characteristics:**
 - **One column, one width.** 680 px, centred, on every page and at every breakpoint. There is no second layout.
-- **No buttons.** A link is underlined text. The only exception is the project dialog, whose controls have to read as pressable; they get a square hairline box, never a pill.
+- **Almost no buttons.** A link is underlined text. Two exceptions get a square hairline box, never a pill: the project dialog's controls, which have to read as pressable, and the three profile links, which are marks rather than words.
 - **No cards, no chips, no bands.** Structure comes from vertical space and, where a list needs scanning, a 1 px `{colors.hairline}` rule. Nothing is filled, floated, or elevated except the modal.
 - **No navigation bar.** The home page is short enough to read; `/products` gets a text back-link. Nothing is sticky.
 - **No entrance animation.** Content is in the first paint, at full opacity, always.
@@ -229,7 +235,8 @@ There is no ≥ 1100 px behaviour. The column stops growing at 680 px, and the e
 
 #### Touch targets
 Links inside a sentence take WCAG 2.2's inline exception; padding them would break the paragraph. Everything else clears 44 × 44 px, and 24 px is treated as a floor to clear, not a size to hit:
-- links in a dotted run — the footer, the "GitHub · X · LinkedIn" line — get `min-width: 44px` and 12 px of block padding, because a one-letter label like "X" is not protected by the inline exception;
+- links in a dotted run get `min-width: 44px` and 12 px of block padding, because a one-letter label is not protected by the inline exception;
+- the profile icon buttons are 44 × 44 px outright — the box *is* the target, so nothing is padded and nothing is pulled back;
 - a link alone on a meta line — the dialog's "Open full size ↗" — gets the same 44 px box.
 
 The padding is invisible, so the caller cancels it with a negative margin and the page rhythm is unchanged. Dialog controls are 36 px tall.
@@ -264,7 +271,7 @@ Rounded corners are a product-UI convention. This page is a document, and docume
 ### Link
 Ink text, 1 px underline in `{colors.hairline-strong}` at 3 px offset; on hover the underline goes to `{colors.ink}`. That is the whole interaction vocabulary of the site — every navigation, every external reference, the email address, the back-link and "All 8 projects, with demos →" are the same object.
 
-A link that opens a dialog rather than a page is a `<button>` carrying the same underline on its title, plus `aria-haspopup="dialog"`.
+A link that opens a dialog rather than a page is a `<button>` carrying the same underline on its title, plus `aria-haspopup="dialog"`. The profile links are the single exception to the underline rule — see **Icon button**.
 
 ### Meta line
 `{typography.meta}` in `{colors.mute}`. Multiple values are joined with a middle dot and a 10 px gutter (`·`), never wrapped in boxes. Links inside a meta line inherit mute and go ink on hover.
@@ -285,6 +292,21 @@ The one repeating structure, used by publications, projects, and roles: title in
 The dialog's Close / Play demo / Stop buttons. `{typography.control}`, 36 px min height, 14 px inline padding, 1 px `{colors.hairline-strong}`, square, white fill. Hover darkens the border to ink. This is the only bordered interactive element in the system.
 
 A control placed over an image carries its own white fill and border, and the image behind it is **not** dimmed. A translucent plate over a poster frame reads as a disabled image, and it is a surface the elevation table does not have.
+
+### Icon button
+The three profile links — GitHub, X, LinkedIn — in the header block and the footer. A 44 × 44 px square, white fill, 1 px `{colors.hairline-strong}`, holding a monochrome mark in `{colors.ink}` at roughly 18 px; hover darkens the border to ink, exactly like the dialog control. They sit in a `<ul>` with an 8 px gap. The focus ring drops its 4 px radius here — the box is square, so the ring around it is too.
+
+This is the one link on the site that is not underlined text, because a glyph has no baseline to underline. Four conditions keep it from being the thin end of an icon set:
+- **The marks are the official ones**, inlined as SVG paths rather than pulled from a package or an icon font. A brand mark is recognised faster than its name; a generic pictogram is not, and does not qualify.
+- **A mark is a letterform or an outline, never a plate.** Brand marks are usually distributed boxed — the vendor's rounded tile with the glyph knocked out of it — and rendered in ink that tile becomes a filled, round-cornered surface, which is the one thing the whole system is built to not have. LinkedIn ships this way and is drawn here as the bare "in" instead. A mark that cannot be separated from its plate does not go in a box.
+- **The glyph is `aria-hidden`.** The accessible name is a visually hidden label, and it names the new tab too, since the visible label that used to carry the link is gone.
+- **It is used for these three links and nothing else.** A section heading, a list bullet, or a call to action does not get an icon.
+
+**Optical sizing.** The three marks are drawn on different grids and none of them fills its own box, so one shared size renders them at three different weights. The sizes are set per mark and checked by measurement, not by eye.
+
+The measure is **ink coverage**: mean per-pixel darkness over the 42 × 42 px interior of the box, the border excluded. The rule is on the **spread, not the level** — the heaviest mark and the lightest must sit within **0.6 points of each other**. An absolute target would be meaningless, since the number moves with the area you divide by: the same row measures 7.3 / 6.8 / 7.2 % over the 42 px interior and 8.9 / 8.4 / 8.8 % over the 38 px the antialiasing leaves clean. Any base area works as long as one is used for all three, so state which.
+
+A row where one mark is visibly heavier than its neighbours reads as clip art, and in a system with no colour and no fill, that is the only thing there is to get wrong. The plate rule above is the usual cause: a boxed mark rendered in ink runs at twice the coverage of a letterform.
 
 ### States (mandatory)
 - **Empty** — a sentence, not a panel: "Nothing published yet — the work in progress is on GitHub." Every list surface must have one, and it must not be a bordered box. The one exception is a section whose heading is a claim in itself: Awards & Grants renders nothing at all when the list is empty, because a heading over "nothing yet" states an absence the page was not asked to state. A section may take this exception only by omitting its heading with it. The same holds one level down: a group with no entries is not an empty group, it is absent — the label goes with it, and a list left with a single group carries no label at all, because a label names a split.
@@ -318,8 +340,8 @@ There are **no scroll reveals and no route transitions**. Content renders visibl
 
 ### Don't
 - Don't add a nav bar, a sticky header, a hero band, or a section background.
-- Don't add a button, a pill, a chip, a tag, a badge, or a card. If something looks clickable because of its box, it is wrong.
-- Don't introduce a second colour, a gradient, or an icon set.
+- Don't add a pill, a chip, a tag, a badge, or a card, and don't add a button beyond the two bordered cases named above. If something looks clickable because of its box, it is wrong.
+- Don't introduce a second colour or a gradient. The only marks on the site are the three profile glyphs, inlined and monochrome — don't pull in an icon library or use an icon anywhere else.
 - Don't set anything above 28 px, at weight 700, or in uppercase.
 - Don't animate anything on scroll, and don't fade a page in on navigation.
 - Don't round a corner.
@@ -348,6 +370,15 @@ Changed in this revision:
 - The torus animates unconditionally: the reduced-motion, `Save-Data`, and IntersectionObserver gates are gone, and `<picture>` picks the mobile or full animation up front.
 - The mobile torus runs the full 14.3 fps rather than ~5, and got smaller doing it: the frames were being dropped to pay for an encode that had lost the alpha quantisation the material depends on.
 - The skip link was removed with the nav bar: with no repeated block before `<main>`, there is nothing to bypass.
+
+Changed after this revision shipped:
+- The "GitHub · X · LinkedIn" dotted run, in both the header block and the footer, became three 44 px square icon buttons. It is a deliberate departure from "no buttons, no icon set": these three are brands whose marks are read faster than their names, and the box reuses the dialog control's vocabulary rather than introducing a new one. The rule it replaces is narrowed, not dropped — the scope is fixed at these three links.
+
+Changed after the design review of the icon buttons:
+- LinkedIn was drawn from the boxed distribution mark, so it rendered as a filled, round-cornered black tile at 15.5 % ink against 8.9 % and 6.9 % for the other two — a filled surface and a rounded corner, both of which the system forbids, sitting in the header's first screen. Replaced with the plain "in" letterform, and the per-mark optical sizing above was added with it: the three now measure 7.3 / 6.8 / 7.2 %.
+- The focus ring's 4 px radius was bulging past the corners of the square box at a 2 px offset; it is square here.
+- The hidden label now says the link opens in a new tab, which the visible label used to imply.
+- `.icon-button` got `position: relative`, so its absolutely positioned label cannot escape it later.
 
 Changed after the design review of this revision:
 - Touch-target rule raised from the 24 px minimum to the 44 px floor for standalone link runs.
