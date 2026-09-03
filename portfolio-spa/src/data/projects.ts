@@ -52,6 +52,25 @@ export const projects: Project[] = [
     media: [{ src: media("aegis-id-oidc.svg"), alt: "AegisID OIDC credential flow diagram" }],
   },
   {
+    slug: "ouroboros",
+    title: "ouroboros",
+    titleJa: "評価器が見える Scheme 処理系",
+    field: "Languages & Runtimes",
+    summary:
+      "A Scheme interpreter with a terminal visualiser that shows the abstract machine, the continuation stack, and the garbage collector while the program runs.",
+    description:
+      "An explicit CEK machine, so control, environment, and continuation are ordinary data on one heap — which is why proper tail calls and first-class continuations fall out of a single design. No dependencies: the mark & sweep collector, the terminal, and the GIF above are all in the repository.",
+    stack: ["Rust", "Scheme", "CEK machine"],
+    media: [
+      {
+        src: media("ouroboros-demo.webp"),
+        animated: media("ouroboros-demo.anim.webp"),
+        animatedSize: "1.1 MB",
+        alt: "Terminal recording of the ouroboros visualiser stepping a Scheme program",
+      },
+    ],
+  },
+  {
     slug: "proc-scanner",
     title: "/proc Scanner",
     field: "Systems Security",
@@ -120,16 +139,6 @@ export const projects: Project[] = [
         alt: "Animated EEG topography produced by the analysis",
       },
     ],
-  },
-  {
-    slug: "mail-generator",
-    title: "Mail Generator",
-    field: "LLM Application",
-    summary: "An email drafting app where the type, content, and tone of the message are chosen up front.",
-    description:
-      "A small application that turns three explicit choices — message type, content points, and tone — into a draft, so the output is steerable instead of a single opaque prompt.",
-    stack: ["OpenAI API", "Python", "React"],
-    media: [{ src: media("AI_mail_generator.webp"), alt: "Mail generator interface" }],
   },
   {
     slug: "rubik-solver",
