@@ -18,8 +18,9 @@ ANIM_WIDTH = 800
 MAX_ANIM_FRAMES = 110
 POSTER_AT = 0.45  # fraction into a recording to take the still from
 # Recordings whose default frame is uninformative (the scanner spends its first half
-# on a mostly-empty desktop; the report only appears at the end).
-POSTER_OVERRIDES = {"proc-scanner-demo": 0.95}
+# on a mostly-empty desktop and the report only appears at the end; the ouroboros
+# default lands on a garbage-collection flash, which reads as an error).
+POSTER_OVERRIDES = {"proc-scanner-demo": 0.95, "ouroboros-demo": 0.44}
 
 
 def fit(image: Image.Image, width: int) -> Image.Image:
