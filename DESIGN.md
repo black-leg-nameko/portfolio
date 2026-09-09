@@ -188,6 +188,7 @@ A transparent animated WebP whose glyphs are `{colors.glyph}` at varying alpha. 
 ### Font family
 1. **Inter** (400 / 500 / 600) — the name, headings, entry titles, prose, dialog controls. Never 700.
 2. **JetBrains Mono** (400) — metadata only: venue, date, author line, stack, project count, back-link, footer. Never a paragraph, never uppercased.
+3. **The system Japanese face** (Hiragino Sans → Yu Gothic → Meiryo → Noto Sans JP) — every run carrying `lang="ja"`, title or metadata. It is named *before* Inter, not after: Inter has no kana but does have the punctuation a Japanese title uses, so an Inter-first stack sets `分析 ― ERC-8004` in two faces, the dash at Latin width in the middle of a Japanese line. Latin inside a Japanese run comes from the Japanese face too — one line, one face.
 
 ### Hierarchy
 
@@ -276,9 +277,12 @@ A link that opens a dialog rather than a page is a `<button>` carrying the same 
 ### Meta line
 `{typography.meta}` in `{colors.mute}`. Multiple values are joined with a middle dot and a 10 px gutter (`·`), never wrapped in boxes. Links inside a meta line inherit mute and go ink on hover.
 
-Three rules the implementation has to honour:
+Five rules the implementation has to honour:
 - **The separator is not part of the link.** The `·` is generated on a wrapper around the anchor, never on the anchor: inside it, it gets the link's underline and lands in the link's accessible name ("·GitHub"). The wrapper is `white-space: nowrap`, so a wrap never strands a dot at the end of a line, and a run that would wrap is split into two blocks instead (the footer does this below 700 px).
-- **Japanese metadata is set in the sans face** at 13 px, because JetBrains Mono has no CJK and would otherwise fall back mid-line. Venues, author lines, group labels, an award's programme name and selected domain, and the dialog's Japanese subtitle take this path.
+- **Japanese metadata is set in the Japanese face** at 13 px, because JetBrains Mono has no CJK and would otherwise fall back mid-line. Venues, author lines, group labels, an award's programme name and selected domain, and the dialog's Japanese subtitle take this path.
+- **A value too long for the run gets a dot bound to its front instead.** `dotted` holds a value unbreakable, which is right for a number or a date and wrong for a Japanese venue: it would push the page sideways at 320 px. Such a value stays breakable and takes its separator as a space, a `.dot-bound` span, and a no-break space — the break opportunity is in front of the dot, so a wrap still carries the dot down with the value rather than stranding it. It is written into the markup rather than generated, and carries `{colors.hairline-strong}` so that the two forms of the separator are the same mark. Long values and short ones sit on separate lines, never in one run.
+- **Japanese sets kinsoku.** Every `lang="ja"` run takes `line-break: strict`, so a line never begins on a small kana or a closing bracket — the default relaxes both, and a narrow viewport is exactly where it shows.
+- **A name is one token.** Author names and institutions are wrapped individually in `nowrap`, each keeping the separator that follows it, because the line breaker will otherwise split `宮本 耕平` at its space and `金烏工科大学校` at any character at all. The gap between two such tokens is the only break opportunity — a space in a Latin run, a bare `<wbr>` in a Japanese one, because `・` is already full-width and a space after it would set two authors further apart than the two halves of either name. It is also why a Japanese line may end on `・` but never begins with one.
 
 ### Entry
 The one repeating structure, used by publications, projects, and roles: title in `{typography.entry-title}`, one line of prose in `{typography.body}`, one meta line. Entries are separated by `{spacing.lg}` of space; only the `/products` list adds hairlines, because it is long enough to need scanning.

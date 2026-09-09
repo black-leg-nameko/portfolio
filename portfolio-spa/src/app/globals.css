@@ -24,6 +24,15 @@
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
 
+  /* Japanese is set in one face, not two. Inter has no kana, so those already come from
+     the system's Japanese font — but it does have the punctuation a Japanese title uses,
+     and an Inter-first stack renders "分析 ― ERC-8004" with the kanji in one face and the
+     ― in another, at Latin width. Naming the Japanese families first keeps the whole run
+     in the face that owns its kana; the Latin inside a Japanese line comes from the same
+     face, which is what a Japanese line wants anyway. */
+  --font-ja: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic Medium", "Yu Gothic",
+    Meiryo, "Noto Sans JP", "Noto Sans CJK JP", var(--font-sans);
+
   /* DESIGN.md has one breakpoint, because there is one layout to change. The rest of
      Tailwind's defaults are unset so a stray `md:` cannot reintroduce one. */
   --breakpoint-sm: 700px;
@@ -120,6 +129,16 @@
     color: var(--color-ink);
   }
 
+  /* A Japanese title is a Japanese line, dashes and brackets included — see --font-ja.
+     Both selectors, because the language can sit on the title or on a span inside it.
+     `line-break: strict` is the kinsoku rule: a line may not begin on a small kana or a
+     closing bracket, which the default relaxes on narrow screens. */
+  .entry-title[lang="ja"],
+  .entry-title [lang="ja"] {
+    font-family: var(--font-ja);
+    line-break: strict;
+  }
+
   /* Mono is metadata and nothing else: venues, dates, stacks, the footer. */
   .meta {
     font-family: var(--font-mono);
@@ -138,14 +157,15 @@
   }
 
   /* JetBrains Mono has no CJK, so a Japanese venue or author line silently falls back
-     mid-sentence. Japanese metadata is set in the sans face on purpose instead.
+     mid-sentence. Japanese metadata is set in the Japanese face on purpose instead.
      Both selectors are needed: the language can sit on the meta element itself
      (an all-Japanese author line) or on a span inside it (a venue in a mixed line). */
   .meta[lang="ja"],
   .meta [lang="ja"] {
-    font-family: var(--font-sans);
+    font-family: var(--font-ja);
     font-size: 13px;
     letter-spacing: 0;
+    line-break: strict;
   }
 
   /* A link that is alone on a meta line is not "inline in a sentence", so it gets a real
@@ -231,6 +251,14 @@
   .dotted > * + *::before {
     content: "·";
     margin-inline: 10px;
+    color: var(--color-hairline-strong);
+  }
+
+  /* The separator for a value too long to sit in a `dotted` run: written into the markup
+     rather than generated, because the break has to fall in front of it and a no-break
+     space has to hold it to the value behind it. Same ink as the generated one — a reader
+     should not be able to tell which of the two an entry is using. */
+  .dot-bound {
     color: var(--color-hairline-strong);
   }
 
