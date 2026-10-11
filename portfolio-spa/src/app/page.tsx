@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { AwardList } from "@/components/AwardList";
+import { OpenOnHash } from "@/components/OpenOnHash";
 import { PublicationList } from "@/components/PublicationList";
+import { Section } from "@/components/Section";
 import { SocialLinks } from "@/components/SocialLinks";
 import { Torus } from "@/components/Torus";
 import { awards } from "@/data/awards";
@@ -9,9 +11,12 @@ import { projects } from "@/data/projects";
 import { publications } from "@/data/publications";
 
 /** Reviewed work and unreviewed work are listed apart, and labelled as such. */
-const peerReviewed = publications.filter((publication) => publication.peerReviewed);
-const notPeerReviewed = publications.filter((publication) => !publication.peerReviewed);
-
+const peerReviewed = publications.filter(
+  (publication) => publication.peerReviewed,
+);
+const notPeerReviewed = publications.filter(
+  (publication) => !publication.peerReviewed,
+);
 
 export default function HomePage() {
   return (
@@ -37,66 +42,66 @@ export default function HomePage() {
       </div>
 
       {/* ── Publications ─────────────────────────────────────────────────── */}
-      <section id="publications" className="mt-16">
-        <h2 className="heading">Publications</h2>
-
-        {publications.length > 0 ? (
-          <div className="mt-6 space-y-10">
-            {/* The labels name the venue as well as the review status. That is true of
+      {/* Every section starts closed: the page opens on a name and four words, and the
+          record is one click under each. */}
+      <OpenOnHash />
+      <div className="mt-16">
+        <Section id="publications" title="Publications">
+          {publications.length > 0 ? (
+            <div className="space-y-10">
+              {/* The labels name the venue as well as the review status. That is true of
                 every entry today, but it is a claim `peerReviewed` alone does not carry:
                 a peer-reviewed domestic paper, or an unreviewed international one, needs
                 the label changed rather than the entry filed under it. */}
-            <PublicationList
-              label="査読付き国際会議"
-              labelEn="Peer-reviewed"
-              publications={peerReviewed}
-            />
-            <PublicationList
-              label="国内学会発表(査読無し)"
-              labelEn="Not peer-reviewed"
-              publications={notPeerReviewed}
-            />
-          </div>
-        ) : (
-          <p className="mt-6">
-            Nothing published yet — work in progress is on{" "}
-            <a href={profile.links.github} target="_blank" rel="noreferrer">
-              GitHub
-            </a>
-            .
-          </p>
-        )}
-      </section>
+              <PublicationList
+                label="査読付き国際会議"
+                labelEn="Peer-reviewed"
+                publications={peerReviewed}
+              />
+              <PublicationList
+                label="国内学会発表(査読無し)"
+                labelEn="Not peer-reviewed"
+                publications={notPeerReviewed}
+              />
+            </div>
+          ) : (
+            <p>
+              Nothing published yet — work in progress is on{" "}
+              <a href={profile.links.github} target="_blank" rel="noreferrer">
+                GitHub
+              </a>
+              .
+            </p>
+          )}
+        </Section>
 
-      {/* ── Awards & Grants ──────────────────────────────────────────────── */}
-      {/* One timeline, not one list per kind: a funded selection and a prize are not the
+        {/* ── Awards & Grants ──────────────────────────────────────────────── */}
+        {/* One timeline, not one list per kind: a funded selection and a prize are not the
           same claim, but the claim is stated on the entry itself (採択 / 受賞), which
           keeps the record in one chronological run. */}
-      {awards.length > 0 && (
-        <section id="awards" className="mt-16">
-          <h2 className="heading">Awards &amp; Grants</h2>
-          <div className="mt-6">
+        {awards.length > 0 && (
+          <Section id="awards" title="Awards & Grants">
             <AwardList awards={awards} />
-          </div>
-        </section>
-      )}
+          </Section>
+        )}
 
-      {/* ── Projects ─────────────────────────────────────────────────────── */}
-      <section id="projects" className="mt-16">
-        <h2 className="heading">Projects</h2>
-        <p className="mt-3">
-          <Link href="/products">{projects.length} projects, with demos →</Link>
-        </p>
-      </section>
+        {/* ── Projects ─────────────────────────────────────────────────────── */}
+        <Section id="projects" title="Projects">
+          <p>
+            <Link href="/products">
+              {projects.length} projects, with demos →
+            </Link>
+          </p>
+        </Section>
 
-      {/* ── Contact ──────────────────────────────────────────────────────── */}
-      <section id="contact" className="mt-16">
-        <h2 className="heading">Contact</h2>
-        <p className="mt-3">
-          Open to research collaboration and security work. Reach me at{" "}
-          <a href={`mailto:${profile.email}`}>{profile.email}</a>.
-        </p>
-      </section>
+        {/* ── Contact ──────────────────────────────────────────────────────── */}
+        <Section id="contact" title="Contact">
+          <p>
+            Open to research collaboration and security work. Reach me at{" "}
+            <a href={`mailto:${profile.email}`}>{profile.email}</a>.
+          </p>
+        </Section>
+      </div>
     </div>
   );
 }

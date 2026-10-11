@@ -121,6 +121,62 @@
     color: var(--color-ink);
   }
 
+  /* A home-page section, closed by default. The heading is the whole control: no box,
+     no icon — a mono "+" that turns into "−" is the only sign it opens. The summary is
+     44px tall so the heading is a real target, and the run of closed headings is
+     spaced by that height alone. */
+  /* A fragment that opens a section leaves its heading off the viewport edge. */
+  .section {
+    scroll-margin-top: 24px;
+  }
+
+  .section > summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 44px;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .section > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  /* `/ ""` keeps the sign out of the summary's accessible name — <details> already
+     announces open and closed. The box is one character wide, centred, so the minus
+     can be stretched to the plus's bar width without moving. */
+  .section > summary::after {
+    content: "+";
+    content: "+" / "";
+    display: inline-block;
+    width: 1ch;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 16px;
+    line-height: 26px;
+    color: var(--color-mute);
+    transition: color 150ms ease;
+  }
+
+  .section > summary:hover::after {
+    color: var(--color-ink);
+  }
+
+  .section[open] > summary::after {
+    content: "−";
+    content: "−" / "";
+    transform: scaleX(1.6);
+  }
+
+  /* Open, a section is what it was before: heading, then the list, then the gap to
+     the next heading. */
+  .section-body {
+    padding-top: 4px;
+    padding-bottom: 48px;
+  }
+
   /* An entry title inside a list (publication, project, role). */
   .entry-title {
     font-size: 16px;

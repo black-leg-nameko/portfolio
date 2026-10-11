@@ -215,7 +215,7 @@ The scale does not change at any breakpoint. Six sizes exist and the gap between
 ### Spacing
 - **Base unit** 4 px. Tokens: `{spacing.xxs}` 4 · `{spacing.xs}` 8 · `{spacing.sm}` 12 · `{spacing.md}` 16 · `{spacing.lg}` 24 · `{spacing.xl}` 32 · `{spacing.2xl}` 40 · `{spacing.3xl}` 48 · `{spacing.4xl}` 64 · `{spacing.5xl}` 80 · `{spacing.6xl}` 112.
 - **Page padding**: `{spacing.5xl}` top and bottom on mobile, `{spacing.6xl}` from 700 px.
-- **Between sections**: `{spacing.4xl}`. This gap is the only thing separating them — there is no rule and no background change.
+- **Between sections**: on the home page every section is a closed disclosure (see Section), so closed headings sit flush, each on its 44 px summary; an open section adds `{spacing.xxs}` under its summary (the summary's own padding makes the visible heading → content gap about `{spacing.sm}`) and `{spacing.3xl}` under its body. Space is still the only thing separating them — there is no rule and no background change.
 - **Inside a section**: heading → prose `{spacing.sm}`; prose → list `{spacing.lg}`; between entries `{spacing.lg}`; entry title → line `{spacing.xxs}`.
 - **Between paragraphs**: `{spacing.2xl}` after the name block, `{spacing.lg}` between body paragraphs.
 
@@ -284,6 +284,13 @@ Five rules the implementation has to honour:
 - **Japanese sets kinsoku.** Every `lang="ja"` run takes `line-break: strict`, so a line never begins on a small kana or a closing bracket — the default relaxes both, and a narrow viewport is exactly where it shows.
 - **A name is one token.** Author names and institutions are wrapped individually in `nowrap`, each keeping the separator that follows it, because the line breaker will otherwise split `宮本 耕平` at its space and `金烏工科大学校` at any character at all. The gap between two such tokens is the only break opportunity — a space in a Latin run, a bare `<wbr>` in a Japanese one, because `・` is already full-width and a space after it would set two authors further apart than the two halves of either name. It is also why a Japanese line may end on `・` but never begins with one.
 
+### Section
+On the home page, Publications, Awards & Grants, Projects and Contact are native `<details>`, all closed on load. The page opens on the name, the statement, the address, the profile glyphs and four headings — the plainness is deliberate, and the record is one click under each. The `<summary>` holds the `<h2>` in `{typography.heading}` and is 44 px tall; its only affordance is a mono `+` in `{colors.mute}` at the right edge that turns to `−` when open — stretched horizontally so its bar matches the plus's, and kept out of the accessible name — and to `{colors.ink}` on hover. It is a text character, not an icon. The browser's own disclosure triangle is removed. Opening is instant — no height or opacity animation.
+
+Closed is not hidden: the content is in the HTML, Chromium's find-in-page opens a section when a match lands in it, and a URL fragment (`/#publications`) opens the section it names on load and on every hash change, landing `{spacing.lg}` below the viewport edge.
+
+The home page has no footer. With every section closed it is short enough that the header's profile links and the footer's would sit on one screen and read as a component drawn twice; the footer stays on every other page.
+
 ### Entry
 The one repeating structure, used by publications, projects, and roles: title in `{typography.entry-title}`, one line of prose in `{typography.body}`, one meta line. Entries are separated by `{spacing.lg}` of space; only the `/products` list adds hairlines, because it is long enough to need scanning.
 
@@ -298,7 +305,7 @@ The dialog's Close / Play demo / Stop buttons. `{typography.control}`, 36 px min
 A control placed over an image carries its own white fill and border, and the image behind it is **not** dimmed. A translucent plate over a poster frame reads as a disabled image, and it is a surface the elevation table does not have.
 
 ### Icon button
-The three profile links — GitHub, X, LinkedIn — in the header block and the footer. A 44 × 44 px square, white fill, 1 px `{colors.hairline-strong}`, holding a monochrome mark in `{colors.ink}` at roughly 18 px; hover darkens the border to ink, exactly like the dialog control. They sit in a `<ul>` with an 8 px gap. The focus ring drops its 4 px radius here — the box is square, so the ring around it is too.
+The three profile links — GitHub, X, LinkedIn — in the header block and, on every page but the home page, the footer. A 44 × 44 px square, white fill, 1 px `{colors.hairline-strong}`, holding a monochrome mark in `{colors.ink}` at roughly 18 px; hover darkens the border to ink, exactly like the dialog control. They sit in a `<ul>` with an 8 px gap. The focus ring drops its 4 px radius here — the box is square, so the ring around it is too.
 
 This is the one link on the site that is not underlined text, because a glyph has no baseline to underline. Four conditions keep it from being the thin end of an icon set:
 - **The marks are the official ones**, inlined as SVG paths rather than pulled from a package or an icon font. A brand mark is recognised faster than its name; a generic pictogram is not, and does not qualify.
