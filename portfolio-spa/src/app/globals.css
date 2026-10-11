@@ -164,7 +164,7 @@
     color: var(--color-ink);
   }
 
-  .section[open] > summary::after {
+  .section[open]:not([data-closing]) > summary::after {
     content: "−";
     content: "−" / "";
     transform: scaleX(1.6);

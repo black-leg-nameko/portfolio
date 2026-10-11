@@ -285,7 +285,7 @@ Five rules the implementation has to honour:
 - **A name is one token.** Author names and institutions are wrapped individually in `nowrap`, each keeping the separator that follows it, because the line breaker will otherwise split `宮本 耕平` at its space and `金烏工科大学校` at any character at all. The gap between two such tokens is the only break opportunity — a space in a Latin run, a bare `<wbr>` in a Japanese one, because `・` is already full-width and a space after it would set two authors further apart than the two halves of either name. It is also why a Japanese line may end on `・` but never begins with one.
 
 ### Section
-On the home page, Publications, Awards & Grants, Projects and Contact are native `<details>`, all closed on load. The page opens on the name, the statement, the address, the profile glyphs and four headings — the plainness is deliberate, and the record is one click under each. The `<summary>` holds the `<h2>` in `{typography.heading}` and is 44 px tall; its only affordance is a mono `+` in `{colors.mute}` at the right edge that turns to `−` when open — stretched horizontally so its bar matches the plus's, and kept out of the accessible name — and to `{colors.ink}` on hover. It is a text character, not an icon. The browser's own disclosure triangle is removed. Opening is instant — no height or opacity animation.
+On the home page, Publications, Awards & Grants, Projects and Contact are native `<details>`, all closed on load. The page opens on the name, the statement, the address, the profile glyphs and four headings — the plainness is deliberate, and the record is one click under each. The `<summary>` holds the `<h2>` in `{typography.heading}` and is 44 px tall; its only affordance is a mono `+` in `{colors.mute}` at the right edge that turns to `−` when open — stretched horizontally so its bar matches the plus's, and kept out of the accessible name — and to `{colors.ink}` on hover. It is a text character, not an icon. The browser's own disclosure triangle is removed. A click opens and closes it with a 240 ms height animation (`cubic-bezier(0.4, 0, 0.2, 1)` — a gentle start, so a tall section does not jump in its first frames), done by hand with the Web Animations API because `<details>` cannot animate on its own in every browser; a click mid-animation reverses from the current height, and the sign changes on the click, not when the animation ends. Opens that do not come from a click — a fragment, find-in-page — stay instant, and a fragment that names a section mid-close cancels the close.
 
 Closed is not hidden: the content is in the HTML, Chromium's find-in-page opens a section when a match lands in it, and a URL fragment (`/#publications`) opens the section it names on load and on every hash change, landing `{spacing.lg}` below the viewport edge.
 
@@ -330,14 +330,15 @@ A row where one mark is visibly heavier than its neighbours reads as clip art, a
 A surface that claims `aria-modal="true"` must behave like one: focus moves into the panel on open, `Tab` / `Shift+Tab` cycle inside it, `Escape` closes it, the page behind it stops scrolling, and focus returns to the element that opened it. A dialog without a focus trap is a bug, not a polish item.
 
 ### Motion
-Effectively none. The site ships three moving things:
+Effectively none. The site ships four moving things:
 1. the dialog's 180 ms fade,
+1. the home-page sections' 240 ms open and close,
 2. 150 ms colour transitions on link underlines and control borders,
 3. the torus animation, with a lightweight asset on mobile.
 
 There are **no scroll reveals and no route transitions**. Content renders visible in the HTML at full opacity — an element hidden by render-blocking CSS and un-hidden by a hydration-time observer is a blank first paint, not an animation.
 
-`prefers-reduced-motion: reduce` collapses every remaining transition. The CSS media query cannot reach a JS-driven animation, so the dialog's fade reads the preference itself and drops its duration to zero — a motion library's defaults are not a reduced-motion implementation. The torus is the deliberate exception: it loops in every environment, by explicit decision, and is `aria-hidden` decoration at 70 % opacity rather than content.
+`prefers-reduced-motion: reduce` collapses every remaining transition. The CSS media query cannot reach a JS-driven animation, so the dialog's fade and the sections' height animation read the preference themselves and drop their duration to zero — a motion library's defaults are not a reduced-motion implementation. The torus is the deliberate exception: it loops in every environment, by explicit decision, and is `aria-hidden` decoration at 70 % opacity rather than content.
 
 ## Do's and Don'ts
 

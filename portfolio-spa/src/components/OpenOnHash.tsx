@@ -12,10 +12,17 @@ export function OpenOnHash() {
       const id = decodeURIComponent(window.location.hash.slice(1));
       if (!id) return;
       const target = document.getElementById(id);
-      if (target instanceof HTMLDetailsElement && !target.open) {
-        target.open = true;
-        target.scrollIntoView();
+      if (!(target instanceof HTMLDetailsElement)) return;
+      // A section mid-close is still `open`, and would close at the end of its animation.
+      if (target.hasAttribute("data-closing")) {
+        target.getAnimations().forEach((animation) => animation.cancel());
+        target.removeAttribute("data-closing");
+        target.style.overflow = "";
+      } else if (target.open) {
+        return;
       }
+      target.open = true;
+      target.scrollIntoView();
     };
     open();
     window.addEventListener("hashchange", open);
