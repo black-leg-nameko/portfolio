@@ -39,7 +39,7 @@ export type Award = {
  */
 export const awards: Award[] = [
   {
-    title: "未踏ターゲット事業",
+    title: "IPA未踏ターゲット事業",
     ja: true,
     track: "リザバーコンピューティング技術を活用したソフトウェア開発分野",
     organization: "IPA",
