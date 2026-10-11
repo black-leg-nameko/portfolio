@@ -25,6 +25,16 @@ export type Publication = {
 export const publications: Publication[] = [
   {
     title:
+      "When Does a Retained Approval Still Count? The Authority Clock in Production and in Agent Protocols",
+    authors: ["Ryuto Kitajima", "Kohei Miyamoto", "Takeshi Takahashi", "Kouichi Sakurai"],
+    affiliation: "Kyushu University / NICT",
+    venue:
+      "PRIMA 2026 — International Conference on Principles and Practice of Multi-Agent Systems",
+    peerReviewed: true,
+    status: "Accepted",
+  },
+  {
+    title:
       "Source-Validated Selective LLM Invocation for Direct Prompt-Injection Attempt Detection under False-Bypass Constraints",
     authors: [
       "Ryuto Kitajima",
