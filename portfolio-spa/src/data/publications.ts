@@ -31,7 +31,7 @@ export const publications: Publication[] = [
     venue:
       "PRIMA 2026 — International Conference on Principles and Practice of Multi-Agent Systems",
     peerReviewed: true,
-    status: "Accepted (Full Paper)",
+    status: "Accepted",
   },
   {
     title:
